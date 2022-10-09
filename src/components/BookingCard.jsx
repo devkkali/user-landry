@@ -1,7 +1,7 @@
 import React from "react";
 
 // type: "ready" | "cancelled" | "rejected" | "completed";
-function BookingCard({ title, type }: Props) {
+function BookingCard({ title, type }) {
   return (
     <div className="rounded-xl bg-white p-1 shadow-sm shadow-gray-200">
       <div
