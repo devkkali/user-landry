@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"src/**/*\""
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.19.1",
     "@headlessui/react": "^1.7.2",
     "axios": "^1.1.2",
     "next": "12.3.1",
@@ -16,10 +18,13 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "eslint": "8.25.0",
-    "eslint-config-next": "12.3.1",
     "@heroicons/react": "^2.0.11",
     "autoprefixer": "^10.4.12",
+    "eslint": "8.25.0",
+    "eslint-config-next": "12.3.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.26.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
