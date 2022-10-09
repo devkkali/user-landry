@@ -23,7 +23,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head />
-        <body className='roshan'>
+        <body>
           <Main />
           <NextScript />
         </body>
