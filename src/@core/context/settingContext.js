@@ -1,72 +1,76 @@
 // ** React Imports
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect } from "react";
 
 // ** ThemeConfig Import
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig from "src/configs/themeConfig";
 
 const initialSettings = {
-  themeColor: 'primary',
+  themeColor: "primary",
   mode: themeConfig.mode,
-}
+};
 
 const staticSettings = {
-//   appBar: initialSettings.appBar,
-//   footer: initialSettings.footer,
-//   layout: initialSettings.layout,
-//   navHidden: initialSettings.navHidden,
-//   lastLayout: initialSettings.lastLayout,
-//   toastPosition: initialSettings.toastPosition
-}
+  //   appBar: initialSettings.appBar,
+  //   footer: initialSettings.footer,
+  //   layout: initialSettings.layout,
+  //   navHidden: initialSettings.navHidden,
+  //   lastLayout: initialSettings.lastLayout,
+  //   toastPosition: initialSettings.toastPosition
+};
 
 const restoreSettings = () => {
-  let settings = null
+  let settings = null;
   try {
-    const storedData = window.localStorage.getItem('settings')
+    const storedData = window.localStorage.getItem("settings");
     if (storedData) {
-      settings = { ...JSON.parse(storedData), ...staticSettings }
+      settings = { ...JSON.parse(storedData), ...staticSettings };
     } else {
-      settings = initialSettings
+      settings = initialSettings;
     }
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 
-  return settings
-}
+  return settings;
+};
 
 // set settings in localStorage
-const storeSettings = settings => {
-  const initSettings = Object.assign({}, settings)
-  window.localStorage.setItem('settings', JSON.stringify(initSettings))
-}
+const storeSettings = (settings) => {
+  const initSettings = Object.assign({}, settings);
+  window.localStorage.setItem("settings", JSON.stringify(initSettings));
+};
 
 // ** Create Context
 export const SettingsContext = createContext({
   saveSettings: () => null,
-  settings: initialSettings
-})
+  settings: initialSettings,
+});
 
 export const SettingsProvider = ({ children, pageSettings }) => {
-    // console.log('i am from setting provider',pageSettings)
+  // console.log('i am from setting provider',pageSettings)
   // ** State
-  const [settings, setSettings] = useState({ ...initialSettings })
+  const [settings, setSettings] = useState({ ...initialSettings });
   useEffect(() => {
-    const restoredSettings = restoreSettings()
+    const restoredSettings = restoreSettings();
     if (restoredSettings) {
-      setSettings({ ...restoredSettings })
+      setSettings({ ...restoredSettings });
     }
     if (pageSettings) {
-      setSettings({ ...settings, ...pageSettings })
+      setSettings({ ...settings, ...pageSettings });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageSettings])
+  }, [pageSettings]);
 
-  const saveSettings = updatedSettings => {
-    storeSettings(updatedSettings)
-    setSettings(updatedSettings)
-  }
+  const saveSettings = (updatedSettings) => {
+    storeSettings(updatedSettings);
+    setSettings(updatedSettings);
+  };
 
-  return <SettingsContext.Provider value={{ settings, saveSettings }}>{children}</SettingsContext.Provider>
-}
+  return (
+    <SettingsContext.Provider value={{ settings, saveSettings }}>
+      {children}
+    </SettingsContext.Provider>
+  );
+};
 
-export const SettingsConsumer = SettingsContext.Consumer
+export const SettingsConsumer = SettingsContext.Consumer;
