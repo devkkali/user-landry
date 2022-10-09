@@ -3,4 +3,5 @@ const Home = () => {
 };
 // Home.getLayout = page => <BlankLayout>{page}</BlankLayout>
 Home.guestGuard = true;
+
 export default Home;
