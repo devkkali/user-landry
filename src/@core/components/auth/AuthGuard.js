@@ -19,11 +19,14 @@ const AuthGuard = (props) => {
       if (auth.user === null && !window.localStorage.getItem("userData")) {
         if (router.asPath !== "/") {
           router.replace({
-            pathname: "/login",
-            query: { returnUrl: router.asPath },
+            pathname: "/",
+            query: { requireAuth: true, returnUrl: router.asPath },
           });
         } else {
-          router.replace("/login");
+          router.replace({
+            pathname: "/",
+            query: { requireAuth: true, returnUrl: router.asPath },
+          });
         }
       }
     },
