@@ -2,7 +2,7 @@ import AuthGuard from 'src/@core/components/auth/AuthGuard'
 import GuestGuard from 'src/@core/components/auth/GuestGuard'
 import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingContext'
 import { AuthProvider } from 'src/context/AuthContext'
-import '../../styles/globals.css'
+import 'styles/globals.css'
 import Layout from '../components/Layout'
 import UserLayout from '../layouts/UserLayout'
 
