@@ -14,8 +14,7 @@ function AccountLayout({ children }) {
             <div className="mt-16 items-start md:mt-0 md:flex">
               <button
                 onClick={() => router.replace("/")}
-                className="mr-4 rounded-full bg-white p-1 hover:bg-gray-100"
-              >
+                className="mr-4 rounded-full bg-white p-1 hover:bg-gray-100">
                 <ArrowSmallLeftIcon className="h-7 w-7 shrink-0 stroke-2" />
               </button>
               <div className="mt-4 md:mt-0">
@@ -32,8 +31,7 @@ function AccountLayout({ children }) {
                   width="28"
                   height="28"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                  xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M14 27.333c-7.364 0-13.333-5.97-13.333-13.334S6.637.666 14 .666c7.364 0 13.334 5.97 13.334 13.333 0 7.364-5.97 13.334-13.334 13.334Zm6.667-8 6.667-5.334-6.667-5.333v4H10v2.667h10.667v4Z"
                     fill="#185ADB"

@@ -19,8 +19,7 @@ function Otp({ phone, onBack }) {
       <div className="items-start md:flex">
         <button
           onClick={onBack}
-          className="mr-4 rounded-full bg-white p-1 hover:bg-gray-100"
-        >
+          className="mr-4 rounded-full bg-white p-1 hover:bg-gray-100">
           <ArrowSmallLeftIcon className="h-7 w-7 shrink-0 stroke-2" />
         </button>
         <div className="mt-2 space-y-1 md:mt-0">

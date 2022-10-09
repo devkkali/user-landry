@@ -59,8 +59,7 @@ export default function RegisterMobile() {
                 <button
                   onClick={() => setStep(2)}
                   disabled={!!!phone}
-                  className="btn-primary"
-                >
+                  className="btn-primary">
                   Register
                 </button>
                 <div className="space-y-4 text-center">
@@ -70,8 +69,7 @@ export default function RegisterMobile() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="mx-auto w-6"
-                        viewBox="0 0 24 24"
-                      >
+                        viewBox="0 0 24 24">
                         <path
                           fill="#4285F4"
                           d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82Z"
@@ -92,8 +90,7 @@ export default function RegisterMobile() {
                     </button>
                     <button
                       onClick={() => setPage("register")}
-                      className="w-max rounded-lg border py-3 px-6 text-center font-semibold uppercase"
-                    >
+                      className="w-max rounded-lg border py-3 px-6 text-center font-semibold uppercase">
                       Email
                     </button>
                   </div>
@@ -101,8 +98,7 @@ export default function RegisterMobile() {
                     {"Already have an account? "}
                     <button
                       onClick={() => setPage("login")}
-                      className="font-semibold text-blue-600"
-                    >
+                      className="font-semibold text-blue-600">
                       Login
                     </button>
                   </p>
