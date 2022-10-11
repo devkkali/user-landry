@@ -25,11 +25,14 @@ const Home = () => {
   const auth = useAuth();
   const router = useRouter();
 
+  // console.log('hello ',router.query.requireAuth)
+
   const [page, setPage] = useState("register-mobile");
 
   const [isOpen, setIsOpen] = useState(() => {
     return !!router.query.requireAuth ?? false;
   });
+
 
   const toggleLoginModal = () => {
     setIsOpen((old) => !old);

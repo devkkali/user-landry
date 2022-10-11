@@ -4,12 +4,15 @@ import Image from "next/future/image";
 import OTP from "./OTP";
 import { AuthPageContext } from "../context/AuthPageContext";
 
+
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useAuth } from "src/hooks/useAuth";
 
-export default function RegisterMobile() {
+
+
+export default function LoginMobile() {
   const [page, setPage] = useContext(AuthPageContext);
   const [step, setStep] = useState(1);
   const [phone, setPhone] = useState();
@@ -38,7 +41,7 @@ export default function RegisterMobile() {
   const auth = useAuth()
 
 
-  const handleRegister = (data) => {
+  const handleLogin = (data) => {
     const { mobileNo } = data
     let countryCode = '+977';
     auth.mobileLoginInit({ mobileNo, countryCode }, (data) => {
@@ -76,7 +79,7 @@ export default function RegisterMobile() {
         {step === 1 && (
           <>
             <div className="space-y-1">
-              <h2 className="text-xl font-semibold">Create your account</h2>
+              <h2 className="text-xl font-semibold">Login in to your account</h2>
               <p className="text-sm text-dark/80">
                 Save extra cash with our monthly or Yearly subscription. If it
                 fits in the bag, we’ll clean it.
@@ -103,13 +106,24 @@ export default function RegisterMobile() {
                         <span>+1</span>
                       </div>
                     </div>
-                    {/* <input
-                      type="text"
-                      id="phone"
-                      value={phone}
-                      onChange={handlePhoneChange}
-                      placeholder="Enter phone number"
-                      className="ml-2 w-full bg-transparent p-2 outline-none"
+                    {/* <Controller
+                      name='id'
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <input
+                          value={value}
+                          onBlur={onBlur}
+                          // label='Email ID'
+                          onChange={onChange}
+                          id='id'
+                          error={Boolean(errors.id)}
+                          type="text"
+                          placeholder="Enter phone number"
+                          className="ml-2 w-full bg-transparent p-2 outline-none"
+
+                        />
+                      )}
                     /> */}
 
                     <input
@@ -130,11 +144,10 @@ export default function RegisterMobile() {
                 {/* <p style={{ marginTop: 0 }} className="text-sm text-red-500">hello</p> */}
                 {errors.mobileNo && (<p style={{ marginTop: 0 }} className="text-sm text-red-500">{errors.mobileNo.message}</p>)}
 
-
                 <button
-                  // onClick={() => setStep(2)}
-                  onClick={handleSubmit(handleRegister)}
+                  onClick={handleSubmit(handleLogin)}
                   disabled={!!!phone}
+                  // disabled={errors.id}
                   className="btn-primary">
                   Register
                 </button>
@@ -165,17 +178,17 @@ export default function RegisterMobile() {
                       </svg>
                     </button>
                     <button
-                      onClick={() => setPage("register")}
+                      onClick={() => setPage("login")}
                       className="w-max rounded-lg border py-3 px-6 text-center font-semibold uppercase">
                       Email
                     </button>
                   </div>
                   <p>
-                    {"Already have an account? "}
+                    {"Don't have an account? "}
                     <button
-                      onClick={() => setPage("login")}
+                      onClick={() => setPage("register")}
                       className="font-semibold text-blue-600">
-                      Login
+                      Register
                     </button>
                   </p>
                 </div>
@@ -185,7 +198,7 @@ export default function RegisterMobile() {
           </>
         )}
 
-        {step === 2 && <OTP phone={phone} from="phoneRegister" onBack={() => setStep(1)} />}
+        {step === 2 && <OTP phone={phone} from="mobileLogin" onBack={() => setStep(1)} />}
       </>
     </div>
   );

@@ -2,8 +2,14 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import AuthPageArtwork from "./AuthPageArtwork";
 import { useEffect, useState } from "react";
 
-function Otp({ phone, onBack }) {
-  const [cooldown, setCooldown] = useState(10);
+import { useAuth } from 'src/hooks/useAuth'
+
+function Otp({ phone, from, password, onBack }) {
+
+  // ** Hook
+  const auth = useAuth()
+
+  const [cooldown, setCooldown] = useState(100);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (cooldown <= 0) return;
@@ -13,6 +19,237 @@ function Otp({ phone, onBack }) {
       clearTimeout(timer);
     };
   }, [cooldown]);
+
+
+  const [errors, setError] = useState({});
+
+  const [otpCodeInput, setOtpCodeInput] = useState('');
+  const otpChange = (e) => {
+    setError('otp', {})
+    setOtpCodeInput(e.target.value);
+  }
+  const handleResendCode = () => {
+    let id = phone;
+    auth.resendOtp({ id }, (data) => {
+      if (data.message == 'success') {
+        setCooldown(30);
+        setError('otp', {})
+        setOtpCodeInput('')
+      } else {
+        if (data.message == 'failed') {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error.message
+            }
+          })
+        } else {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error
+            }
+          })
+        }
+      }
+
+    })
+  }
+
+  const handleVerifyOtp = () => {
+    if (from == 'forgot') {
+      handleVerifyOtpForgot();
+    } else if (from == 'emailLogin') {
+      handleVerifyEmailLogin();
+    } else if (from == 'mobileLogin') {
+      handleVerifyMobileLogin();
+    } else if (from == 'emailRegister') {
+      handlevarifyEmailRegister();
+    } else if (from == 'phoneRegister') {
+      handlevarifyPhoneRegister();
+    }
+  }
+
+  const handleVerifyEmailLogin = () => {
+    let id = phone;
+    if (otpCodeInput != '') {
+      let otp = otpCodeInput.replace(/\s/g, '');
+      auth.verifyOtp({ id, otp }, (data) => {
+        // console.log(data.response.data)
+        if (data.message == 'failed') {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error.message
+            }
+          })
+        } else {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error
+            }
+          })
+        }
+      })
+    } else {
+      setError({
+        'otp': {
+          // type: 'manual',
+          message: 'please Enter otp'
+        }
+      })
+    }
+
+  }
+
+  const handleVerifyMobileLogin = () => {
+    let id = phone;
+    if (otpCodeInput != '') {
+      let otp = otpCodeInput.replace(/\s/g, '');
+      auth.verifyOtp({ id, otp }, (data) => {
+        // console.log(data.response.data)
+        if (data.message == 'failed') {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error.message
+            }
+          })
+        } else {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error
+            }
+          })
+        }
+      })
+    } else {
+      setError({
+        'otp': {
+          // type: 'manual',
+          message: 'please Enter otp'
+        }
+      })
+    }
+
+  }
+  const handlevarifyEmailRegister = () => {
+    let id = phone;
+    if (otpCodeInput != '') {
+      let otp = otpCodeInput.replace(/\s/g, '');
+      auth.verifyOtp({ id, otp }, (data) => {
+        // console.log(data.response.data)
+        if (data.message == 'failed') {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error.message
+            }
+          })
+        } else {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error
+            }
+          })
+        }
+      })
+    } else {
+      setError({
+        'otp': {
+          // type: 'manual',
+          message: 'please Enter otp'
+        }
+      })
+    }
+
+  }
+  const handlevarifyPhoneRegister = () => {
+    let id = phone;
+    if (otpCodeInput != '') {
+      let otp = otpCodeInput.replace(/\s/g, '');
+      auth.verifyOtp({ id, otp }, (data) => {
+        // console.log(data.response.data)
+        if (data.message == 'failed') {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error.message
+            }
+          })
+        } else {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error
+            }
+          })
+        }
+      })
+    } else {
+      setError({
+        'otp': {
+          // type: 'manual',
+          message: 'please Enter otp'
+        }
+      })
+    }
+
+  }
+
+  const handleVerifyOtpForgot = () => {
+    let id = phone;
+    console.log(otpCodeInput)
+    if (otpCodeInput != '') {
+      console.log(otpCodeInput)
+      let otp = otpCodeInput.replace(/\s/g, '');
+
+      auth.verifyOtpforgotPassword({ id, otp, password }, (data) => {
+        console.log(data);
+        if (data.message == 'success') {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.data.data.messsage
+            }
+          })
+        } else if (data.message == 'failed') {
+          console.log(data.error.message)
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error.message
+            }
+          })
+        }
+        else {
+          setError({
+            'otp': {
+              // type: 'manual',
+              message: data.error
+            }
+          })
+        }
+
+      })
+    } else {
+      setError({
+        'otp': {
+          // type: 'manual',
+          message: 'please Enter otp'
+        }
+      })
+    }
+
+
+
+  }
+
+
+
 
   return (
     <>
@@ -44,8 +281,11 @@ function Otp({ phone, onBack }) {
                 id="phone"
                 placeholder="Enter Code"
                 className="ml-2 w-full bg-transparent p-2 outline-none"
+                value={otpCodeInput}
+                onChange={otpChange}
               />
             </div>
+            {errors.otp && (<p style={{ marginTop: 0 }} className="text-sm text-red-500">{errors.otp.message}</p>)}
           </div>
           <div>
             {cooldown > 0 ? (
@@ -55,13 +295,13 @@ function Otp({ phone, onBack }) {
             ) : (
               <div>
                 <span>{"Didn't receive the code? "}</span>
-                <button className="text-blue-600">Resend OTP</button>
+                <button onClick={handleResendCode} className="text-blue-600">Resend OTP</button>
               </div>
             )}
           </div>
 
           {/*make it disabled conditionally*/}
-          <button className="btn-primary">Verify</button>
+          <button onClick={handleVerifyOtp} disabled={cooldown > 0 ? ('') : ('disabled')} className="btn-primary">Verify</button>
         </div>
         <AuthPageArtwork />
       </div>
