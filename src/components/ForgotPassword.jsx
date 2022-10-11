@@ -84,7 +84,7 @@ export default function ForgotPassword() {
               <h2 className="text-xl font-semibold">Forgot Password</h2>
               <p className="text-sm text-dark/80">
                 Save extra cash with our monthly or Yearly subscription. If it fits in
-                the bag, we'll clean it.
+                the bag, we’ll clean it.
               </p>
             </div>
             <div className="mt-8 gap-6 md:mt-12 md:flex">
