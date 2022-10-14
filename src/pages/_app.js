@@ -11,7 +11,7 @@ import UserLayout from "../layouts/UserLayout";
 
 const Guard = ({ children, authGuard, guestGuard }) => {
   if (guestGuard) {
-    return <GuestGuard fallback={<>Loading...</>}>{children}</GuestGuard>;
+    return <GuestGuard fallback={<>Loading.....</>}>{children}</GuestGuard>;
   } else if (!guestGuard && !authGuard) {
     return <>{children}</>;
   } else {

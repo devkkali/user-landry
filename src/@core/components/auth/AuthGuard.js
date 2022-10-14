@@ -25,7 +25,7 @@ const AuthGuard = (props) => {
         } else {
           router.replace({
             pathname: "/",
-            query: { requireAuth: true, returnUrl: router.asPath },
+            // query: { requireAuth: true, returnUrl: router.asPath },
           });
         }
       }

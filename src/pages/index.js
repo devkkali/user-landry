@@ -17,7 +17,7 @@ import Modal from "src/components/Modal";
  *  Set Home URL based on User Roles
  */
 export const getHomeRoute = (role) => {
-  if (role === "client") return "/acl";
+  if (role === "user") return "/home";
   else return "/dashboards/crm";
 };
 
@@ -108,4 +108,5 @@ const Home = () => {
 };
 
 Home.authGuard = false;
+// Home.guestGuard = true
 export default Home;

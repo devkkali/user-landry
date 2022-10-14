@@ -49,9 +49,8 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const initAuth = async () => {
       setIsInitialized(true);
-      const storedToken = window.localStorage.getItem(
-        authConfig.storageTokenKeyName
-      );
+      const storedToken = 'Bearer ' + window.localStorage.getItem(authConfig.storageTokenKeyName);
+
       if (storedToken) {
         setLoading(true);
         await axios
@@ -92,7 +91,7 @@ const AuthProvider = ({ children }) => {
     axios
       .post(authConfig.loginEndpoint, params, { headers: headers })
       .then(async res => {
-        window.localStorage.setItem(authConfig.storageTokenKeyName, res.data.accessToken)
+        // window.localStorage.setItem(authConfig.storageTokenKeyName, res.data.accessToken)
         console.log('res:', res);
         data['message'] = 'success'
         data['data'] = res
@@ -199,7 +198,8 @@ const AuthProvider = ({ children }) => {
             const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
             // console.log('return url: ', redirectURL);
             // console.log('res from login: ', response);
-            router.replace(redirectURL)
+            // router.replace(redirectURL)
+            router.reload(redirectURL)
           })
       })
       .catch(err => {
