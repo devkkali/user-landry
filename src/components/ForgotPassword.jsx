@@ -23,8 +23,8 @@ export default function ForgotPassword() {
 
   const schema = yup.object().shape({
     id: yup.string().email().required('Email is a required field'),
-    password: yup.string().min(5,'Confirm password must be at least 5 characters').required('Password is a requires field'),
-    confirm_password: yup.string().min(5,'Confirm password must be at least 5 characters').required('Confirm Password is a requires field').oneOf([yup.ref('password')], 'Password does not match'),
+    password: yup.string().min(5,'Confirm password must be at least 5 characters').required('Password is a required field'),
+    confirm_password: yup.string().min(5,'Confirm password must be at least 5 characters').required('Confirm Password is a required field').oneOf([yup.ref('password')], 'Password does not match'),
   })
 
   const {
