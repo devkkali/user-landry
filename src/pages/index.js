@@ -140,7 +140,7 @@ const Home = () => {
       </header>
       <div className="bg-[#185adb]">
         <div className="container flex flex-col gap-16 py-3 md:flex-row">
-          <div className="w-full py-8">
+          <div className="w-full py-10">
             <h1 className="text-5xl font-bold text-white">
               <span className="text-[#FFE55E]">Laundry </span>
               Services
@@ -558,8 +558,8 @@ const Home = () => {
           </div>
         </div>
         <div className="bg-white">
-          <div className="container pt-20 pb-8">
-            <h2 className="text-center text-4xl font-medium uppercase">
+          <div className="container pb-8">
+            <h2 className="py-20 text-center text-4xl font-medium uppercase">
               HOW IT WORKS: IN 4 EASY STEPS
             </h2>
             <div className="flex items-start justify-center py-4">
@@ -806,6 +806,236 @@ const Home = () => {
                   across the triangle; thus assuring the highest levels of
                   convenience.
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 bg-white">
+          <div className="container pb-8">
+            <h2 className="py-16 text-center text-4xl font-medium">
+              Subscription Plans
+            </h2>
+            <div className="flex justify-center gap-8">
+              <div className="rounded-xl bg-[#F3F3F3] p-8">
+                <div className="flex items-center gap-4">
+                  <div className="rounded-lg bg-[#185ADB]/[15%] py-1.5 px-2">
+                    <svg
+                      className="h-14 w-14"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 64 64">
+                      <path
+                        fill="#FF782C"
+                        d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                      />
+                      <path
+                        fill="#fff"
+                        d="M51.196 15.718c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                      />
+                      <path
+                        fill="#FF782C"
+                        d="M40.76 24.196c-.603.258-1.12.86-4.627 5.185-1.678 2.066-3.12 3.787-3.227 3.83-.108.043-.84-.56-1.657-1.312-1.958-1.83-2.388-2.088-3.356-2.088-1.593 0-2.733 1.162-2.733 2.733.022.452.13 1.011.28 1.27.236.387 3.442 3.42 5.53 5.206 1.032.904 2.216 1.098 3.248.603 1.055-.538 9.92-11.188 10.2-12.286.343-1.398-.883-3.012-2.475-3.227-.41-.065-.947-.022-1.184.086Z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold">DE-LITE</div>
+                    <div className="mt-0.5">
+                      <span className="text-lg font-semibold">$20.00</span>
+                      {" monthly"}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-8 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 35 35">
+                      <g clipPath="url(#star)">
+                        <path
+                          fill="#185ADB"
+                          d="M17.5 26.628 7.213 32.386 9.51 20.824.855 12.821l11.707-1.388L17.498.729l4.938 10.704 11.706 1.388-8.655 8.003 2.297 11.562L17.5 26.628Z"
+                        />
+                      </g>
+                      <clipPath id="star">
+                        <path fill="#fff" d="M0 0h35v35H0z" />
+                      </clipPath>
+                    </svg>
+                    <span className="font-medium">2 Laundry Pickups</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 35 35">
+                      <g clipPath="url(#star)">
+                        <path
+                          fill="#185ADB"
+                          d="M17.5 26.628 7.213 32.386 9.51 20.824.855 12.821l11.707-1.388L17.498.729l4.938 10.704 11.706 1.388-8.655 8.003 2.297 11.562L17.5 26.628Z"
+                        />
+                      </g>
+                      <clipPath id="star">
+                        <path fill="#fff" d="M0 0h35v35H0z" />
+                      </clipPath>
+                    </svg>
+                    <span className="font-medium">2 Laundry Delivery</span>
+                  </div>
+                </div>
+                <button className="mx-auto mb-4 mt-10 block w-max rounded-full bg-[#FF782C] py-2.5 px-8 text-white">
+                  Choose Plan
+                </button>
+              </div>
+              <div className="rounded-xl bg-[#F3F3F3]">
+                <div className="mx-auto w-10/12 rounded-b-3xl bg-[#FFD990] p-2 text-center font-semibold">
+                  Most popular
+                </div>
+                <div className="p-8">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-lg bg-[#185ADB]/[15%] py-1.5 px-2">
+                      <svg
+                        className="h-14 w-14"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 64 64">
+                        <path
+                          fill="#FF782C"
+                          d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                        />
+                        <path
+                          fill="#fff"
+                          d="M51.196 15.718c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                        />
+                        <path
+                          fill="#FF782C"
+                          d="M40.76 24.196c-.603.258-1.12.86-4.627 5.185-1.678 2.066-3.12 3.787-3.227 3.83-.108.043-.84-.56-1.657-1.312-1.958-1.83-2.388-2.088-3.356-2.088-1.593 0-2.733 1.162-2.733 2.733.022.452.13 1.011.28 1.27.236.387 3.442 3.42 5.53 5.206 1.032.904 2.216 1.098 3.248.603 1.055-.538 9.92-11.188 10.2-12.286.343-1.398-.883-3.012-2.475-3.227-.41-.065-.947-.022-1.184.086Z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold">DE-SERVE</div>
+                      <div className="mt-0.5">
+                        <span className="text-lg font-semibold">$30.00</span>
+                        {" monthly"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-8 space-y-3">
+                    <div className="flex items-center gap-2">
+                      <svg
+                        className="h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 35 35">
+                        <g clipPath="url(#star)">
+                          <path
+                            fill="#185ADB"
+                            d="M17.5 26.628 7.213 32.386 9.51 20.824.855 12.821l11.707-1.388L17.498.729l4.938 10.704 11.706 1.388-8.655 8.003 2.297 11.562L17.5 26.628Z"
+                          />
+                        </g>
+                        <clipPath id="star">
+                          <path fill="#fff" d="M0 0h35v35H0z" />
+                        </clipPath>
+                      </svg>
+                      <span className="font-medium">4 Laundry Pickups</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <svg
+                        className="h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 35 35">
+                        <g clipPath="url(#star)">
+                          <path
+                            fill="#185ADB"
+                            d="M17.5 26.628 7.213 32.386 9.51 20.824.855 12.821l11.707-1.388L17.498.729l4.938 10.704 11.706 1.388-8.655 8.003 2.297 11.562L17.5 26.628Z"
+                          />
+                        </g>
+                        <clipPath id="star">
+                          <path fill="#fff" d="M0 0h35v35H0z" />
+                        </clipPath>
+                      </svg>
+                      <span className="font-medium">4 Laundry Delivery</span>
+                    </div>
+                  </div>
+                  <button className="mx-auto mb-4 mt-10 block w-max rounded-full bg-[#FF782C] py-2.5 px-8 text-white">
+                    Choose Plan
+                  </button>
+                </div>
+              </div>
+              <div className="rounded-xl bg-[#F3F3F3] p-8">
+                <div className="flex items-center gap-4">
+                  <div className="rounded-lg bg-[#185ADB]/[15%] py-1.5 px-2">
+                    <svg
+                      className="h-14 w-14"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 64 64">
+                      <path
+                        fill="#FF782C"
+                        d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                      />
+                      <path
+                        fill="#fff"
+                        d="M51.196 15.718c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                      />
+                      <path
+                        fill="#FF782C"
+                        d="M40.76 24.196c-.603.258-1.12.86-4.627 5.185-1.678 2.066-3.12 3.787-3.227 3.83-.108.043-.84-.56-1.657-1.312-1.958-1.83-2.388-2.088-3.356-2.088-1.593 0-2.733 1.162-2.733 2.733.022.452.13 1.011.28 1.27.236.387 3.442 3.42 5.53 5.206 1.032.904 2.216 1.098 3.248.603 1.055-.538 9.92-11.188 10.2-12.286.343-1.398-.883-3.012-2.475-3.227-.41-.065-.947-.022-1.184.086Z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold">DE-VINE</div>
+                    <div className="mt-0.5">
+                      <span className="text-lg font-semibold">$50.00</span>
+                      {" monthly"}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-8 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 35 35">
+                      <g clipPath="url(#star)">
+                        <path
+                          fill="#185ADB"
+                          d="M17.5 26.628 7.213 32.386 9.51 20.824.855 12.821l11.707-1.388L17.498.729l4.938 10.704 11.706 1.388-8.655 8.003 2.297 11.562L17.5 26.628Z"
+                        />
+                      </g>
+                      <clipPath id="star">
+                        <path fill="#fff" d="M0 0h35v35H0z" />
+                      </clipPath>
+                    </svg>
+                    <span className="font-medium">8 Laundry Pickups</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 35 35">
+                      <g clipPath="url(#star)">
+                        <path
+                          fill="#185ADB"
+                          d="M17.5 26.628 7.213 32.386 9.51 20.824.855 12.821l11.707-1.388L17.498.729l4.938 10.704 11.706 1.388-8.655 8.003 2.297 11.562L17.5 26.628Z"
+                        />
+                      </g>
+                      <clipPath id="star">
+                        <path fill="#fff" d="M0 0h35v35H0z" />
+                      </clipPath>
+                    </svg>
+                    <span className="font-medium">8 Laundry Delivery</span>
+                  </div>
+                </div>
+                <button className="mx-auto mb-4 mt-10 block w-max rounded-full bg-[#FF782C] py-2.5 px-8 text-white">
+                  Choose Plan
+                </button>
               </div>
             </div>
           </div>
