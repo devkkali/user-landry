@@ -2,9 +2,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
       sans: ["Inter", ...defaultTheme.fontFamily.sans],
@@ -15,7 +13,7 @@ module.exports = {
     extend: {
       colors: {
         dark: "#0A1931",
-        primary: "#319FDD",
+        primary: "#185ADB",
       },
       boxShadow: {
         light: "0 1px 20px rgba(0,0,0,0.08)",

@@ -15,7 +15,7 @@
 @layer components{
 
   .container{
-    @apply max-w-screen-2xl mx-auto px-12;
+    @apply max-w-screen-2xl mx-auto px-4 lg:px-12;
   }
   .btn-primary{
     @apply w-full rounded-md bg-primary p-3 font-medium text-white disabled:bg-gray-200 disabled:text-gray-400 enabled:hover:bg-primary/90;

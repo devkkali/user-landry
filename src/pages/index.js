@@ -12,6 +12,17 @@ import { useAuth } from "src/hooks/useAuth";
 import AuthPages from "src/components/AuthPages";
 import Image from "next/future/image";
 import Modal from "src/components/Modal";
+import {
+  RiFacebookBoxFill,
+  RiInstagramFill,
+  RiLinkedinBoxFill,
+  RiMailSendFill,
+  RiMapPin5Fill,
+  RiPinterestFill,
+  RiTimeFill,
+  RiTwitterFill,
+  RiYoutubeFill,
+} from "react-icons/ri";
 
 /**
  *  Set Home URL based on User Roles
@@ -54,16 +65,16 @@ const Home = () => {
       <Modal isOpen={isOpen} onClose={closeModal}>
         <AuthPages />
       </Modal>
-      <header className="sticky top-0 z-[5000] w-full border-b border-gray-50/10 bg-[#185ADB]">
+      <header className="sticky top-0 z-[5000] w-full border-b border-gray-50/10 bg-primary">
         <div className="container flex items-center py-2">
           <Image
             src={"/logo.png"}
             width={160}
             height={90}
-            className="object-contain"
+            className="object-contain object-left lg:object-center"
             alt="Logo"
           />
-          <ul className="ml-4 flex items-center space-x-2 text-white">
+          <ul className="ml-4 hidden items-center space-x-2 text-white lg:flex">
             <li>
               <a href="#" className="p-2">
                 Services
@@ -90,7 +101,7 @@ const Home = () => {
               </a>
             </li>
           </ul>
-          <div className="ml-auto flex gap-2">
+          <div className="ml-auto hidden gap-2 lg:flex">
             <button
               onClick={toggleLoginModal}
               className="ml-6 inline-flex rounded-lg bg-white py-3 px-6 font-semibold hover:bg-white/90">
@@ -136,12 +147,29 @@ const Home = () => {
               </span>
             </button>
           </div>
+          <button className="ml-auto lg:hidden">
+            <svg
+              className="h-8"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 28 28">
+              <g clipPath="url(#bars)">
+                <path
+                  fill="#fff"
+                  d="M21 21v2.333H7v-2.334h14Zm3.5-8.167v2.333h-21v-2.333h21ZM21 4.666v2.333H7V4.666h14Z"
+                />
+              </g>
+              <clipPath id="bars">
+                <path fill="#fff" d="M0 0h28v28H0z" />
+              </clipPath>
+            </svg>
+          </button>
         </div>
       </header>
       <div className="bg-[#185adb]">
-        <div className="container flex flex-col gap-16 py-3 md:flex-row">
-          <div className="w-full py-10">
-            <h1 className="text-5xl font-bold text-white">
+        <div className="container flex flex-col py-3 md:flex-row lg:gap-16">
+          <div className="w-full py-4 lg:py-10">
+            <h1 className="text-3xl font-bold text-white lg:text-5xl">
               <span className="text-[#FFE55E]">Laundry </span>
               Services
             </h1>
@@ -149,7 +177,7 @@ const Home = () => {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid
               aut debitis deleniti distinctio.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 hidden lg:block">
               <h2 className="text-xl font-semibold text-white">
                 Schedule your laundry items
               </h2>
@@ -307,14 +335,16 @@ const Home = () => {
       </div>
       <main className="bg-[#F8F8F8]">
         <div className="bg-white">
-          <div className="container flex items-center justify-between gap-4 py-6">
-            <h2 className="text-2xl font-semibold">Our Services</h2>
-            <div className="rounded-full border-2 border-dotted border-amber-400 py-2 px-6">
+          <div className="container flex items-center justify-between gap-1 py-3 lg:gap-4 lg:py-6">
+            <h2 className="text-base font-semibold lg:text-2xl">
+              Our Services
+            </h2>
+            <div className="rounded-full border-2 border-dotted border-amber-400 px-2 py-1 text-sm font-medium lg:py-2 lg:px-4">
               {`"Instant pickup and delivery"`}
             </div>
           </div>
         </div>
-        <div className="container grid grid-cols-3 gap-12 py-12">
+        <div className="container grid grid-cols-1 gap-12 py-12 lg:grid-cols-3">
           <div className="flex cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow">
             <div className="flex aspect-square h-48 flex-col bg-[#DAFFE9]">
               <svg
@@ -335,13 +365,13 @@ const Home = () => {
                   d="M48.735 60.736c-1.793 1.32-3.137 3.592-3.137 5.494 0 1.637 1.4 4.014 3.753 6.286 2.072 2.007 2.016 3.17-.504 6.497-.84 1.11-.224 2.589 1.12 2.589 1.12 0 2.913-1.638 3.977-3.54 1.288-2.43.728-4.595-2.184-8.346-2.857-3.698-2.97-4.384-.897-6.075 1.065-.792 1.177-2.166.224-3.064-.84-.792-1.064-.792-2.352.159ZM57.316 61.771c-3.056 3.394-2.892 5.144 1.091 10.13 1.146 1.485 2.128 3.076 2.128 3.553 0 .424-.6 1.538-1.364 2.387-1.582 1.803-1.746 3.182-.49 3.66 2.345.848 6.056-3.82 5.455-6.895-.163-.955-1.418-3.023-2.782-4.614-1.364-1.592-2.456-3.289-2.456-3.82 0-.476.6-1.59 1.364-2.439 1.583-1.856 1.637-1.909.492-2.97-1.2-1.166-1.528-1.113-3.438 1.008ZM67.745 61.829c-2.243 2.55-2.34 5.472-.195 8.394 2.048 2.816 3.17 4.729 3.17 5.473 0 .319-.586 1.328-1.269 2.231-2.34 3.029-.34 5.154 2.292 2.391 2.974-3.081 2.73-6.535-.78-10.945-1.95-2.497-2.145-4.09-.731-5.472 1.121-1.063 1.267-2.39.39-3.347-.83-.903-.975-.85-2.877 1.275ZM20.49 14.595c-.777.575-.888.94-.388 1.671.555.836 1.72.94 12.819 1.097 10.155.105 12.32 0 12.874-.627.5-.574.555-1.044.056-1.88-.61-1.044-.944-1.096-12.486-1.044-9.046.052-12.043.261-12.875.783ZM70.667 14.588c-.328.421-.547 1.159-.437 1.685.163.895 1.201.948 13.549 1.106 7.375.052 13.931 0 14.641-.158 1.312-.316 1.585-1.79.547-2.79-.492-.475-4.37-.633-14.15-.633-11.09 0-13.604.158-14.15.79Z"
                 />
               </svg>
-              <div className="shrink-0 bg-[#185ADB] p-1 text-center font-semibold text-white">
+              <div className="shrink-0 bg-primary p-1 text-center font-semibold text-white">
                 20% OFF
               </div>
             </div>
             <div className="flex grow flex-col justify-center bg-white p-10">
               <div className="text-xl font-bold">Dry cleaning</div>
-              <div className="text-[#185ADB]">
+              <div className="text-primary">
                 Starting from{" "}
                 <span className="font-semibold text-dark">$10.52</span>
               </div>
@@ -367,13 +397,13 @@ const Home = () => {
                   d="M104.789 46.658c6.843 18.854 7.185 20.775 7.185 38.407v18.68H101.71l-.171-11.871c-.171-6.46 0-12.745.171-14.141.171-1.397-2.566-9.078-5.988-16.934l-6.33-14.316 2.737-9.776c1.54-5.412 3.422-9.776 4.106-9.776.685 0 4.448 8.903 8.554 19.727ZM33.28 43.865c0 2.968-2.225 10.649-5.133 17.108-4.448 10.126-5.132 13.617-5.132 27.234v15.538l-4.62.174-4.79.35 4.79.698c6.33 1.047 6.16 5.761-.17 5.761h-4.962l-1.026-20.6-1.198-20.426 8.212-22.346 8.04-22.346 2.909 6.634c1.71 3.666 3.08 9.078 3.08 12.22Z"
                 />
               </svg>
-              <div className="shrink-0 bg-[#185ADB] p-1 text-center font-semibold text-white">
+              <div className="shrink-0 bg-primary p-1 text-center font-semibold text-white">
                 20% OFF
               </div>
             </div>
             <div className="flex grow flex-col justify-center bg-white p-10">
               <div className="text-xl font-bold">Laundry</div>
-              <div className="text-[#185ADB]">
+              <div className="text-primary">
                 Starting from{" "}
                 <span className="font-semibold text-dark">$10.52</span>
               </div>
@@ -408,13 +438,13 @@ const Home = () => {
                   />
                 </g>
               </svg>
-              <div className="shrink-0 bg-[#185ADB] p-1 text-center font-semibold text-white">
+              <div className="shrink-0 bg-primary p-1 text-center font-semibold text-white">
                 20% OFF
               </div>
             </div>
             <div className="flex grow flex-col justify-center bg-white p-10">
               <div className="text-xl font-bold">Leather & Suede</div>
-              <div className="text-[#185ADB]">
+              <div className="text-primary">
                 Starting from{" "}
                 <span className="font-semibold text-dark">$10.52</span>
               </div>
@@ -456,13 +486,13 @@ const Home = () => {
                   d="M93.721 71.272c.32.48.08 1.52-.4 2.32-.8 1.28-2.32 1.68-9.36 2.16-7.52.48-8.64.4-10.4-.96-2.8-2.08-3.04-3.28-.8-3.6 5.12-.72 20.56-.64 20.96.08ZM92.841 100.952c.72.88 1.36 2 1.36 2.4 0 .48-4.48.8-11.6.8-6.88 0-11.6-.32-11.6-.8 0-.4.8-1.44 1.76-2.4 1.52-1.36 2.8-1.6 10.24-1.6s8.64.16 9.84 1.6Z"
                 />
               </svg>
-              <div className="shrink-0 bg-[#185ADB] p-1 text-center font-semibold text-white">
+              <div className="shrink-0 bg-primary p-1 text-center font-semibold text-white">
                 20% OFF
               </div>
             </div>
             <div className="flex grow flex-col justify-center bg-white p-10">
               <div className="text-xl font-bold">Alterations</div>
-              <div className="text-[#185ADB]">
+              <div className="text-primary">
                 Starting from{" "}
                 <span className="font-semibold text-dark">$10.52</span>
               </div>
@@ -496,13 +526,13 @@ const Home = () => {
                   d="M95.688 78.267c.863.863-1.036 1.122-13.29 2.071-15.36 1.208-16.827 1.64-16.827 5.092 0 4.573 1.036 4.746 18.122 3.538 14.325-1.036 17.604-.95 16.137.604-.604.604-23.645 2.761-30.117 2.847-5.177 0-7.593-2.07-7.593-6.472 0-3.02 2.33-6.385 4.573-6.558.518 0 6.3-.518 12.685-1.208 10.528-.95 15.274-.95 16.31.086Z"
                 />
               </svg>
-              <div className="shrink-0 bg-[#185ADB] p-1 text-center font-semibold text-white">
+              <div className="shrink-0 bg-primary p-1 text-center font-semibold text-white">
                 20% OFF
               </div>
             </div>
             <div className="flex grow flex-col justify-center bg-white p-10">
               <div className="text-xl font-bold">Household</div>
-              <div className="text-[#185ADB]">
+              <div className="text-primary">
                 Starting from{" "}
                 <span className="font-semibold text-dark">$10.52</span>
               </div>
@@ -544,13 +574,13 @@ const Home = () => {
                   d="M78.31 62.961c-.18.779-.24 4.432-.18 8.205l.18 6.887 5.39 1.317c2.994.779 5.569 1.138 5.868.898.24-.24.36-4.491.3-9.402l-.18-8.923-5.51-.18c-5.33-.18-5.569-.12-5.868 1.198Z"
                 />
               </svg>
-              <div className="shrink-0 bg-[#185ADB] p-1 text-center font-semibold text-white">
+              <div className="shrink-0 bg-primary p-1 text-center font-semibold text-white">
                 20% OFF
               </div>
             </div>
             <div className="flex grow flex-col justify-center bg-white p-10">
               <div className="text-xl font-bold">Shoe Repair</div>
-              <div className="text-[#185ADB]">
+              <div className="text-primary">
                 Starting from{" "}
                 <span className="font-semibold text-dark">$10.52</span>
               </div>
@@ -559,10 +589,10 @@ const Home = () => {
         </div>
         <div className="bg-white">
           <div className="container pb-8">
-            <h2 className="py-20 text-center text-4xl font-medium uppercase">
+            <h2 className="py-20 text-center text-3xl font-semibold uppercase">
               HOW IT WORKS: IN 4 EASY STEPS
             </h2>
-            <div className="flex items-start justify-center py-4">
+            <div className="flex flex-col items-start justify-center py-4 lg:flex-row">
               <div className="flex flex-col">
                 <svg
                   className="h-28"
@@ -595,7 +625,7 @@ const Home = () => {
                 </div>
               </div>
               <svg
-                className="mt-12 w-36"
+                className="mt-12 hidden w-36 lg:block"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 212 48">
@@ -639,7 +669,7 @@ const Home = () => {
                 </div>
               </div>
               <svg
-                className="mt-12 w-36 -scale-y-100"
+                className="mt-12 hidden w-36 -scale-y-100 lg:block"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 212 48">
@@ -675,7 +705,7 @@ const Home = () => {
                 </div>
               </div>
               <svg
-                className="mt-12 w-36"
+                className="mt-12 hidden w-36 lg:block"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 212 48">
@@ -718,10 +748,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <h2 className="py-20 text-center text-4xl font-medium">
+            <h2 className="pb-16 pt-20 text-center text-3xl font-semibold">
               Why Deluxe Cleaners ?
             </h2>
-            <div className="flex gap-5">
+            <div className="flex flex-col gap-5 lg:flex-row">
               <div className="w-full rounded-3xl bg-[#DAFFE9] p-8">
                 <svg
                   className="w-20"
@@ -812,13 +842,13 @@ const Home = () => {
         </div>
         <div className="mt-8 bg-white">
           <div className="container pb-8">
-            <h2 className="py-16 text-center text-4xl font-medium">
+            <h2 className="py-16 text-center text-3xl font-semibold">
               Subscription Plans
             </h2>
-            <div className="flex justify-center gap-8">
+            <div className="flex flex-col justify-center gap-8 lg:flex-row">
               <div className="rounded-xl bg-[#F3F3F3] p-8">
                 <div className="flex items-center gap-4">
-                  <div className="rounded-lg bg-[#185ADB]/[15%] py-1.5 px-2">
+                  <div className="rounded-lg bg-primary/[15%] py-1.5 px-2">
                     <svg
                       className="h-14 w-14"
                       xmlns="http://www.w3.org/2000/svg"
@@ -894,7 +924,7 @@ const Home = () => {
                 </div>
                 <div className="p-8">
                   <div className="flex items-center gap-4">
-                    <div className="rounded-lg bg-[#185ADB]/[15%] py-1.5 px-2">
+                    <div className="rounded-lg bg-primary/[15%] py-1.5 px-2">
                       <svg
                         className="h-14 w-14"
                         xmlns="http://www.w3.org/2000/svg"
@@ -967,7 +997,7 @@ const Home = () => {
               </div>
               <div className="rounded-xl bg-[#F3F3F3] p-8">
                 <div className="flex items-center gap-4">
-                  <div className="rounded-lg bg-[#185ADB]/[15%] py-1.5 px-2">
+                  <div className="rounded-lg bg-primary/[15%] py-1.5 px-2">
                     <svg
                       className="h-14 w-14"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1040,7 +1070,261 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className="mt-8 bg-white">
+          <div className="container pt-16 pb-8">
+            <h2 className="text-center text-3xl font-semibold">
+              THE BEST GUARANTEE IN THE BUSINESS
+            </h2>
+            <div className="mx-auto my-6 h-1 w-32 rounded-full bg-primary" />
+            <p className="mx-auto mt-4 max-w-7xl text-center text-lg font-medium">
+              We will do everything we can to return your clothes to you in
+              great shape. In the rare instance that an item goes missing or is
+              damaged during the cleaning process, we’ll reimburse you ten times
+              the amount it cost you to get the garment clean.
+            </p>
+            <div className="mt-10 flex flex-col justify-center gap-8 lg:flex-row">
+              <div className="rounded-xl bg-[#F3F3F3] p-8">
+                <div className="flex gap-4">
+                  <svg
+                    className="h-10 shrink-0"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 62 62">
+                    <g clipPath="url(#svgquote)">
+                      <path
+                        fill="#185ADB"
+                        d="M11.84 44.745C9.178 41.92 7.75 38.75 7.75 33.611c0-9.041 6.347-17.145 15.578-21.152l2.306 3.56c-8.615 4.66-10.3 10.708-10.971 14.52 1.387-.717 3.203-.968 4.983-.803 4.66.432 8.334 4.258 8.334 9.014a9.041 9.041 0 0 1-9.042 9.041c-2.771 0-5.422-1.266-7.099-3.045Zm25.833 0c-2.661-2.826-4.09-5.995-4.09-11.134 0-9.041 6.348-17.145 15.578-21.152l2.307 3.56c-8.616 4.66-10.3 10.708-10.972 14.52 1.388-.717 3.204-.968 4.984-.803 4.66.432 8.333 4.258 8.333 9.014a9.042 9.042 0 0 1-9.041 9.041c-2.772 0-5.423-1.266-7.1-3.045Z"
+                      />
+                    </g>
+                    <clipPath id="svgquote">
+                      <path fill="#fff" d="M0 0h62v62H0z" />
+                    </clipPath>
+                  </svg>
+                  <div>
+                    <div className="text-2xl font-bold">Irene Adler</div>
+                    <div className="font-semibold text-primary">Customer</div>
+                    <div className="mt-2">
+                      Vestibulum ac diam sit amet quam vehicula elementum sed
+                      sit amet dui. Curabitur non nulla sit amet nisl tempus
+                      convallis quis ac lectus.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-xl bg-[#F3F3F3] p-8">
+                <div className="flex gap-4">
+                  <svg
+                    className="h-10 shrink-0"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 62 62">
+                    <g clipPath="url(#svgquote)">
+                      <path
+                        fill="#185ADB"
+                        d="M11.84 44.745C9.178 41.92 7.75 38.75 7.75 33.611c0-9.041 6.347-17.145 15.578-21.152l2.306 3.56c-8.615 4.66-10.3 10.708-10.971 14.52 1.387-.717 3.203-.968 4.983-.803 4.66.432 8.334 4.258 8.334 9.014a9.041 9.041 0 0 1-9.042 9.041c-2.771 0-5.422-1.266-7.099-3.045Zm25.833 0c-2.661-2.826-4.09-5.995-4.09-11.134 0-9.041 6.348-17.145 15.578-21.152l2.307 3.56c-8.616 4.66-10.3 10.708-10.972 14.52 1.388-.717 3.204-.968 4.984-.803 4.66.432 8.333 4.258 8.333 9.014a9.042 9.042 0 0 1-9.041 9.041c-2.772 0-5.423-1.266-7.1-3.045Z"
+                      />
+                    </g>
+                    <clipPath id="svgquote">
+                      <path fill="#fff" d="M0 0h62v62H0z" />
+                    </clipPath>
+                  </svg>
+                  <div>
+                    <div className="text-2xl font-bold">Irene Adler</div>
+                    <div className="font-semibold text-primary">Customer</div>
+                    <div className="mt-2">
+                      Vestibulum ac diam sit amet quam vehicula elementum sed
+                      sit amet dui. Curabitur non nulla sit amet nisl tempus
+                      convallis quis ac lectus.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-xl bg-[#F3F3F3] p-8">
+                <div className="flex gap-4">
+                  <svg
+                    className="h-10 shrink-0"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 62 62">
+                    <g clipPath="url(#svgquote)">
+                      <path
+                        fill="#185ADB"
+                        d="M11.84 44.745C9.178 41.92 7.75 38.75 7.75 33.611c0-9.041 6.347-17.145 15.578-21.152l2.306 3.56c-8.615 4.66-10.3 10.708-10.971 14.52 1.387-.717 3.203-.968 4.983-.803 4.66.432 8.334 4.258 8.334 9.014a9.041 9.041 0 0 1-9.042 9.041c-2.771 0-5.422-1.266-7.099-3.045Zm25.833 0c-2.661-2.826-4.09-5.995-4.09-11.134 0-9.041 6.348-17.145 15.578-21.152l2.307 3.56c-8.616 4.66-10.3 10.708-10.972 14.52 1.388-.717 3.204-.968 4.984-.803 4.66.432 8.333 4.258 8.333 9.014a9.042 9.042 0 0 1-9.041 9.041c-2.772 0-5.423-1.266-7.1-3.045Z"
+                      />
+                    </g>
+                    <clipPath id="svgquote">
+                      <path fill="#fff" d="M0 0h62v62H0z" />
+                    </clipPath>
+                  </svg>
+                  <div>
+                    <div className="text-2xl font-bold">Irene Adler</div>
+                    <div className="font-semibold text-primary">Customer</div>
+                    <div className="mt-2">
+                      Vestibulum ac diam sit amet quam vehicula elementum sed
+                      sit amet dui. Curabitur non nulla sit amet nisl tempus
+                      convallis quis ac lectus.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="relative mt-8 overflow-hidden bg-white">
+          <div className="container flex">
+            <div className="flex w-1/2 flex-col justify-center">
+              <div className="max-w-lg text-3xl font-bold">
+                Schedule your laundry items from your phone
+              </div>
+              <div className="mt-4 text-lg">
+                Please enter your phone number to get the App download link
+              </div>
+              <div className="mt-12 flex w-max rounded-lg border-2 border-primary">
+                <div className="border-r-2 border-primary px-6 py-3 text-xl font-semibold">
+                  +1
+                </div>
+                <input
+                  type="text"
+                  className="w-full bg-transparent px-4 outline-none"
+                />
+                <button className="rounded-l-full bg-primary py-3 pl-10 pr-8 text-lg text-white">
+                  Send
+                </button>
+              </div>
+              <div className="mt-8 flex gap-4">
+                <div className="flex items-center rounded-xl bg-black p-2.5">
+                  <img
+                    src="/google-play.png"
+                    className="h-8 w-8 object-contain"
+                    alt=""
+                  />
+                  <div className="ml-3 w-36 text-white">
+                    <div className="text-sm font-medium">GET IT ON</div>
+                    <div className="text-lg font-bold leading-5">
+                      Google Play
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center rounded-xl bg-black p-2.5">
+                  <img
+                    src="/app-store.png"
+                    className="h-8 w-8 object-contain"
+                    alt=""
+                  />
+                  <div className="ml-3 w-36 text-white">
+                    <div className="text-sm font-medium">Download on the</div>
+                    <div className="text-lg font-bold leading-5">App Store</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative z-[1] h-[40rem] w-1/2">
+              <img
+                className="absolute left-20 bottom-0 w-80"
+                src="/sc1.png"
+                alt=""
+              />
+              <img
+                className="absolute left-72 bottom-0 w-80"
+                src="/sc2.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div className="absolute left-1/2 bottom-0 top-4 z-0 w-full rounded-tl-[10rem] bg-yellow-200" />
+        </div>
       </main>
+      <footer className="border-b-2 border-white bg-primary text-white">
+        <div className="container flex justify-between gap-4 border-b-2 border-white/20 py-10">
+          <div>
+            <h1 className="text-3xl font-bold">
+              GET STARTED TODAY!
+              <span className="ml-3 text-xl font-medium">+1(919) 438-0450</span>
+            </h1>
+            <div className="mt-8 space-y-2">
+              <div className="flex gap-4 text-lg">
+                <RiTimeFill size={23} />
+                <span>Mon - Fri 7am - 7pm Sat 9am - 3pm</span>
+              </div>
+              <div className="flex gap-4 text-lg">
+                <RiMapPin5Fill size={23} />
+                <span>1810 Martin Luther King Jr PkwyDurham, NC 27707</span>
+              </div>
+              <div className="flex gap-4 text-lg">
+                <RiMailSendFill size={23} />
+                <span>contact@deluxecleanersnc.com</span>
+              </div>
+            </div>
+          </div>
+          <div className="min-w-[15rem]">
+            <h2 className="text-xl font-semibold">Important Links</h2>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a href="#" className="inline-block hover:underline">
+                  About us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="inline-block hover:underline">
+                  Terms and Conditions
+                </a>
+              </li>
+              <li>
+                <a href="#" className="inline-block hover:underline">
+                  Privacy Policy
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="container flex items-center gap-4 py-6">
+          <Image
+            src={"/logo.png"}
+            width={160}
+            height={90}
+            className="object-contain object-left lg:object-center"
+            alt="Logo"
+          />
+          <div>
+            <div className="mb-2 flex gap-3">
+              <RiFacebookBoxFill size={24} />
+              <RiTwitterFill size={24} />
+              <RiInstagramFill size={24} />
+              <RiYoutubeFill size={24} />
+              <RiLinkedinBoxFill size={24} />
+              <RiPinterestFill size={24} />
+            </div>
+            <div>&copy; 2022 Deluxe Cleaners</div>
+          </div>
+          <div className="ml-auto flex items-center">
+            <span className="text-xl">Download our app</span>
+            <div className="ml-10 flex gap-4">
+              <div className="flex items-center rounded-xl bg-black p-2.5">
+                <img
+                  src="/google-play.png"
+                  className="h-8 w-8 object-contain"
+                  alt=""
+                />
+                <div className="ml-3 w-36 text-white">
+                  <div className="text-sm font-medium">GET IT ON</div>
+                  <div className="text-lg font-bold leading-5">Google Play</div>
+                </div>
+              </div>
+              <div className="flex items-center rounded-xl bg-black p-2.5">
+                <img
+                  src="/app-store.png"
+                  className="h-8 w-8 object-contain"
+                  alt=""
+                />
+                <div className="ml-3 w-36 text-white">
+                  <div className="text-sm font-medium">Download on the</div>
+                  <div className="text-lg font-bold leading-5">App Store</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };
