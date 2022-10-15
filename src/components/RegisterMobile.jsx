@@ -5,8 +5,8 @@ import OTP from "./OTP";
 import { AuthPageContext } from "../context/AuthPageContext";
 
 import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useAuth } from "src/hooks/useAuth";
 
 export default function RegisterMobile() {
@@ -15,60 +15,53 @@ export default function RegisterMobile() {
   const [phone, setPhone] = useState();
   const handlePhoneChange = (e) => {
     // console.log(e.target.value)
-    setError('mobileNo', {})
+    setError("mobileNo", {});
     setPhone(e.target.value.trim());
   };
 
   const schema = yup.object().shape({
-    mobileNo: yup.string().required('Phone is a required field').min(5, 'min 5'),
-  })
+    mobileNo: yup
+      .string()
+      .required("Phone is a required field")
+      .min(5, "min 5"),
+  });
 
   const {
     register,
     control,
     setError,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(schema)
-  })
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
 
   // ** Hook
-  const auth = useAuth()
-
+  const auth = useAuth();
 
   const handleRegister = (data) => {
-    const { mobileNo } = data
-    let countryCode = '+977';
+    const { mobileNo } = data;
+    let countryCode = "+977";
     auth.mobileLoginInit({ mobileNo, countryCode }, (data) => {
-      if (data.message == 'success') {
+      if (data.message == "success") {
         setPhone(mobileNo);
-        setStep(2)
+        setStep(2);
       } else {
-        if (data.message == 'failed') {
-
-          setError(
-            'mobileNo', {
+        if (data.message == "failed") {
+          setError("mobileNo", {
             // type: 'manual',
-            message: data.error.message
-          }
-          )
-
+            message: data.error.message,
+          });
         } else {
-          setError(
-            'different', {
+          setError("different", {
             // type: 'manual',
-            message: data.error
-          }
-          )
+            message: data.error,
+          });
         }
       }
-
-    })
-  }
-
-
+    });
+  };
 
   return (
     <div className="p-6">
@@ -113,23 +106,25 @@ export default function RegisterMobile() {
                     /> */}
 
                     <input
-                      {...register('mobileNo')}
+                      {...register("mobileNo")}
                       value={phone}
                       // onBlur={onBlur}
                       // label='Email ID'
                       onChange={handlePhoneChange}
-                      id='mobileNo'
+                      id="mobileNo"
                       // error={Boolean(errors.id)}
                       type="text"
                       placeholder="Enter phone number"
                       className="ml-2 w-full bg-transparent p-2 outline-none"
-
                     />
                   </div>
                 </div>
                 {/* <p style={{ marginTop: 0 }} className="text-sm text-red-500">hello</p> */}
-                {errors.mobileNo && (<p style={{ marginTop: 0 }} className="text-sm text-red-500">{errors.mobileNo.message}</p>)}
-
+                {errors.mobileNo && (
+                  <p style={{ marginTop: 0 }} className="text-sm text-red-500">
+                    {errors.mobileNo.message}
+                  </p>
+                )}
 
                 <button
                   // onClick={() => setStep(2)}
@@ -185,7 +180,9 @@ export default function RegisterMobile() {
           </>
         )}
 
-        {step === 2 && <OTP phone={phone} from="phoneRegister" onBack={() => setStep(1)} />}
+        {step === 2 && (
+          <OTP phone={phone} from="phoneRegister" onBack={() => setStep(1)} />
+        )}
       </>
     </div>
   );

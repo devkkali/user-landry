@@ -3,34 +3,36 @@ import Input from "src/components/Input";
 import AuthPageArtwork from "./AuthPageArtwork";
 import { AuthPageContext } from "../context/AuthPageContext";
 
-
 import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useAuth } from "src/hooks/useAuth";
 import Otp from "./OTP";
-
 
 export default function Register() {
   const [page, setPage] = useContext(AuthPageContext);
   // ** Hook
-  const auth = useAuth()
+  const auth = useAuth();
 
   const schema = yup.object().shape({
-    id: yup.string().email().required('Email is a required field'),
-    password: yup.string().min(5).required('Password is a required field'),
-    confirm_password: yup.string().min(5).required('Confirm Password is a required field').oneOf([yup.ref('password')], 'Password does not match'),
-  })
+    id: yup.string().email().required("Email is a required field"),
+    password: yup.string().min(5).required("Password is a required field"),
+    confirm_password: yup
+      .string()
+      .min(5)
+      .required("Confirm Password is a required field")
+      .oneOf([yup.ref("password")], "Password does not match"),
+  });
 
   const {
     control,
     setError,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(schema)
-  })
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
 
   const [step, setStep] = useState(1);
   const [typedEmail, setTypedEmail] = useState(null);
@@ -41,33 +43,27 @@ export default function Register() {
     let email = id;
     let password = confirm_password;
     auth.registerByEmail({ email, password }, (data) => {
-      if (data.message == 'success') {
+      if (data.message == "success") {
         // setTypedId(id);
         setTypedEmail(id);
         // setTypedConfirmPassword(confirm_password)
         setStep(2);
       } else {
-        if (data.message == 'failed') {
+        if (data.message == "failed") {
           // console.log(data.data.data.message)
-          setError(
-            'id', {
+          setError("id", {
             // type: 'manual',
-            message: data.error.message
-          }
-          )
+            message: data.error.message,
+          });
         } else {
-          setError(
-            'id', {
+          setError("id", {
             // type: 'manual',
-            message: data.error
-          }
-          )
+            message: data.error,
+          });
         }
       }
-
-    })
-  }
-
+    });
+  };
 
   return (
     <div className="p-6">
@@ -77,35 +73,41 @@ export default function Register() {
             <div className="space-y-1">
               <h2 className="text-xl font-semibold">Create your account</h2>
               <p className="text-sm text-dark/80">
-                Save extra cash with our monthly or Yearly subscription. If it fits in
-                the bag, we’ll clean it.
+                Save extra cash with our monthly or Yearly subscription. If it
+                fits in the bag, we’ll clean it.
               </p>
             </div>
             <div className="mt-8 gap-6 md:mt-12 md:flex">
               <div className="space-y-4 md:w-4/12 md:min-w-[300px]">
                 {/*conditionally render this element*/}
-                {errors.different && (<p className="text-sm text-red-500">{errors.different.message}</p>)}
-
+                {errors.different && (
+                  <p className="text-sm text-red-500">
+                    {errors.different.message}
+                  </p>
+                )}
 
                 {/* <Input label="Email ID" id="email" name="Email" type="text" /> */}
                 <Controller
-                  name='id'
+                  name="id"
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange, onBlur } }) => (
                     <Input
                       value={value}
                       // onBlur={onBlur}
-                      label='Email ID'
+                      label="Email ID"
                       onChange={onChange}
-                      id='id'
+                      id="id"
                       // error={Boolean(errors.password)}
                       type="text"
-
                     />
                   )}
                 />
-                {errors.id && (<p style={{ marginTop: 0 }} className="text-sm text-red-500">{errors.id.message}</p>)}
+                {errors.id && (
+                  <p style={{ marginTop: 0 }} className="text-sm text-red-500">
+                    {errors.id.message}
+                  </p>
+                )}
 
                 {/* <Input
             label="Password"
@@ -114,23 +116,26 @@ export default function Register() {
             type="password"
           /> */}
                 <Controller
-                  name='password'
+                  name="password"
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange, onBlur } }) => (
                     <Input
                       value={value}
                       onBlur={onBlur}
-                      label='Password'
+                      label="Password"
                       onChange={onChange}
-                      id='password'
+                      id="password"
                       // error={Boolean(errors.password)}
                       type="password"
-
                     />
                   )}
                 />
-                {errors.password && (<p style={{ marginTop: 0 }} className="text-sm text-red-500">{errors.password.message}</p>)}
+                {errors.password && (
+                  <p style={{ marginTop: 0 }} className="text-sm text-red-500">
+                    {errors.password.message}
+                  </p>
+                )}
                 {/* <Input
             label="Confirm Password"
             id="confirm-password"
@@ -138,25 +143,32 @@ export default function Register() {
             type="password"
           /> */}
                 <Controller
-                  name='confirm_password'
+                  name="confirm_password"
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange, onBlur } }) => (
                     <Input
                       value={value}
                       onBlur={onBlur}
-                      label='Confirm Password'
+                      label="Confirm Password"
                       onChange={onChange}
-                      id='confirm_password'
+                      id="confirm_password"
                       // error={Boolean(errors.password)}
                       type="password"
-
                     />
                   )}
                 />
-                {errors.confirm_password && (<p style={{ marginTop: 0 }} className="text-sm text-red-500">{errors.confirm_password.message}</p>)}
+                {errors.confirm_password && (
+                  <p style={{ marginTop: 0 }} className="text-sm text-red-500">
+                    {errors.confirm_password.message}
+                  </p>
+                )}
                 {/*make it disabled conditionally*/}
-                <button onClick={handleSubmit(handleRegister)} className="btn-primary">Register</button>
+                <button
+                  onClick={handleSubmit(handleRegister)}
+                  className="btn-primary">
+                  Register
+                </button>
                 <div className="space-y-4 text-center">
                   <div className="separator">or continue with</div>
                   <div className="flex items-stretch justify-center space-x-3">
@@ -203,10 +215,14 @@ export default function Register() {
             </div>
           </>
         )}
-        {step === 2 && <Otp phone={typedEmail} from={"emailRegister"} onBack={() => setStep(1)} />}
-
+        {step === 2 && (
+          <Otp
+            phone={typedEmail}
+            from={"emailRegister"}
+            onBack={() => setStep(1)}
+          />
+        )}
       </>
-
     </div>
   );
 }

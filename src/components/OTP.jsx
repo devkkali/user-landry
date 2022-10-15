@@ -2,12 +2,11 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import AuthPageArtwork from "./AuthPageArtwork";
 import { useEffect, useState } from "react";
 
-import { useAuth } from 'src/hooks/useAuth'
+import { useAuth } from "src/hooks/useAuth";
 
 function Otp({ phone, from, password, onBack }) {
-
   // ** Hook
-  const auth = useAuth()
+  const auth = useAuth();
 
   const [cooldown, setCooldown] = useState(100);
   useEffect(() => {
@@ -20,236 +19,222 @@ function Otp({ phone, from, password, onBack }) {
     };
   }, [cooldown]);
 
-
   const [errors, setError] = useState({});
 
-  const [otpCodeInput, setOtpCodeInput] = useState('');
+  const [otpCodeInput, setOtpCodeInput] = useState("");
   const otpChange = (e) => {
-    setError('otp', {})
+    setError("otp", {});
     setOtpCodeInput(e.target.value);
-  }
+  };
   const handleResendCode = () => {
     let id = phone;
     auth.resendOtp({ id }, (data) => {
-      if (data.message == 'success') {
+      if (data.message == "success") {
         setCooldown(30);
-        setError('otp', {})
-        setOtpCodeInput('')
+        setError("otp", {});
+        setOtpCodeInput("");
       } else {
-        if (data.message == 'failed') {
+        if (data.message == "failed") {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error.message
-            }
-          })
+              message: data.error.message,
+            },
+          });
         } else {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error
-            }
-          })
+              message: data.error,
+            },
+          });
         }
       }
-
-    })
-  }
+    });
+  };
 
   const handleVerifyOtp = () => {
-    if (from == 'forgot') {
+    if (from == "forgot") {
       handleVerifyOtpForgot();
-    } else if (from == 'emailLogin') {
+    } else if (from == "emailLogin") {
       handleVerifyEmailLogin();
-    } else if (from == 'mobileLogin') {
+    } else if (from == "mobileLogin") {
       handleVerifyMobileLogin();
-    } else if (from == 'emailRegister') {
+    } else if (from == "emailRegister") {
       handlevarifyEmailRegister();
-    } else if (from == 'phoneRegister') {
+    } else if (from == "phoneRegister") {
       handlevarifyPhoneRegister();
     }
-  }
+  };
 
   const handleVerifyEmailLogin = () => {
     let id = phone;
-    if (otpCodeInput != '') {
-      let otp = otpCodeInput.replace(/\s/g, '');
+    if (otpCodeInput != "") {
+      let otp = otpCodeInput.replace(/\s/g, "");
       auth.verifyOtp({ id, otp }, (data) => {
         // console.log(data.response.data)
-        if (data.message == 'failed') {
+        if (data.message == "failed") {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error.message
-            }
-          })
+              message: data.error.message,
+            },
+          });
         } else {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error
-            }
-          })
+              message: data.error,
+            },
+          });
         }
-      })
+      });
     } else {
       setError({
-        'otp': {
+        otp: {
           // type: 'manual',
-          message: 'please Enter otp'
-        }
-      })
+          message: "please Enter otp",
+        },
+      });
     }
-
-  }
+  };
 
   const handleVerifyMobileLogin = () => {
     let id = phone;
-    if (otpCodeInput != '') {
-      let otp = otpCodeInput.replace(/\s/g, '');
+    if (otpCodeInput != "") {
+      let otp = otpCodeInput.replace(/\s/g, "");
       auth.verifyOtp({ id, otp }, (data) => {
         // console.log(data.response.data)
-        if (data.message == 'failed') {
+        if (data.message == "failed") {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error.message
-            }
-          })
+              message: data.error.message,
+            },
+          });
         } else {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error
-            }
-          })
+              message: data.error,
+            },
+          });
         }
-      })
+      });
     } else {
       setError({
-        'otp': {
+        otp: {
           // type: 'manual',
-          message: 'please Enter otp'
-        }
-      })
+          message: "please Enter otp",
+        },
+      });
     }
-
-  }
+  };
   const handlevarifyEmailRegister = () => {
     let id = phone;
-    if (otpCodeInput != '') {
-      let otp = otpCodeInput.replace(/\s/g, '');
+    if (otpCodeInput != "") {
+      let otp = otpCodeInput.replace(/\s/g, "");
       auth.verifyOtp({ id, otp }, (data) => {
         // console.log(data.response.data)
-        if (data.message == 'failed') {
+        if (data.message == "failed") {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error.message
-            }
-          })
+              message: data.error.message,
+            },
+          });
         } else {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error
-            }
-          })
+              message: data.error,
+            },
+          });
         }
-      })
+      });
     } else {
       setError({
-        'otp': {
+        otp: {
           // type: 'manual',
-          message: 'please Enter otp'
-        }
-      })
+          message: "please Enter otp",
+        },
+      });
     }
-
-  }
+  };
   const handlevarifyPhoneRegister = () => {
     let id = phone;
-    if (otpCodeInput != '') {
-      let otp = otpCodeInput.replace(/\s/g, '');
+    if (otpCodeInput != "") {
+      let otp = otpCodeInput.replace(/\s/g, "");
       auth.verifyOtp({ id, otp }, (data) => {
         // console.log(data.response.data)
-        if (data.message == 'failed') {
+        if (data.message == "failed") {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error.message
-            }
-          })
+              message: data.error.message,
+            },
+          });
         } else {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error
-            }
-          })
+              message: data.error,
+            },
+          });
         }
-      })
+      });
     } else {
       setError({
-        'otp': {
+        otp: {
           // type: 'manual',
-          message: 'please Enter otp'
-        }
-      })
+          message: "please Enter otp",
+        },
+      });
     }
-
-  }
+  };
 
   const handleVerifyOtpForgot = () => {
     let id = phone;
-    console.log(otpCodeInput)
-    if (otpCodeInput != '') {
-      console.log(otpCodeInput)
-      let otp = otpCodeInput.replace(/\s/g, '');
+    console.log(otpCodeInput);
+    if (otpCodeInput != "") {
+      console.log(otpCodeInput);
+      let otp = otpCodeInput.replace(/\s/g, "");
 
       auth.verifyOtpforgotPassword({ id, otp, password }, (data) => {
         console.log(data);
-        if (data.message == 'success') {
+        if (data.message == "success") {
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.data.data.messsage
-            }
-          })
-        } else if (data.message == 'failed') {
-          console.log(data.error.message)
+              message: data.data.data.messsage,
+            },
+          });
+        } else if (data.message == "failed") {
+          console.log(data.error.message);
           setError({
-            'otp': {
+            otp: {
               // type: 'manual',
-              message: data.error.message
-            }
-          })
+              message: data.error.message,
+            },
+          });
+        } else {
+          setError({
+            otp: {
+              // type: 'manual',
+              message: data.error,
+            },
+          });
         }
-        else {
-          setError({
-            'otp': {
-              // type: 'manual',
-              message: data.error
-            }
-          })
-        }
-
-      })
+      });
     } else {
       setError({
-        'otp': {
+        otp: {
           // type: 'manual',
-          message: 'please Enter otp'
-        }
-      })
+          message: "please Enter otp",
+        },
+      });
     }
-
-
-
-  }
-
-
-
+  };
 
   return (
     <>
@@ -285,7 +270,11 @@ function Otp({ phone, from, password, onBack }) {
                 onChange={otpChange}
               />
             </div>
-            {errors.otp && (<p style={{ marginTop: 0 }} className="text-sm text-red-500">{errors.otp.message}</p>)}
+            {errors.otp && (
+              <p style={{ marginTop: 0 }} className="text-sm text-red-500">
+                {errors.otp.message}
+              </p>
+            )}
           </div>
           <div>
             {cooldown > 0 ? (
@@ -295,13 +284,20 @@ function Otp({ phone, from, password, onBack }) {
             ) : (
               <div>
                 <span>{"Didn't receive the code? "}</span>
-                <button onClick={handleResendCode} className="text-blue-600">Resend OTP</button>
+                <button onClick={handleResendCode} className="text-blue-600">
+                  Resend OTP
+                </button>
               </div>
             )}
           </div>
 
           {/*make it disabled conditionally*/}
-          <button onClick={handleVerifyOtp} disabled={cooldown > 0 ? ('') : ('disabled')} className="btn-primary">Verify</button>
+          <button
+            onClick={handleVerifyOtp}
+            disabled={cooldown > 0 ? "" : "disabled"}
+            className="btn-primary">
+            Verify
+          </button>
         </div>
         <AuthPageArtwork />
       </div>

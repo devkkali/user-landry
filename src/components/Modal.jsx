@@ -5,7 +5,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 function Modal({ isOpen, onClose, children }) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={onClose}>
+      <Dialog as="div" className="relative z-[5000]" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

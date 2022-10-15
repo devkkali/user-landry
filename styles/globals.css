@@ -13,15 +13,41 @@
   }
 }
 @layer components{
+
+  .container{
+    @apply max-w-screen-2xl mx-auto px-12;
+  }
   .btn-primary{
     @apply w-full rounded-md bg-primary p-3 font-medium text-white disabled:bg-gray-200 disabled:text-gray-400 enabled:hover:bg-primary/90;
   }
+
   .label{
     @apply p-1 font-medium;
   }
+
   .input{
     @apply bg-gray-50 rounded-md px-3 transition-colors w-full py-2.5 border inline-block disabled:border-gray-100 mt-1 focus:border-primary focus:bg-white focus-within:border-primary focus-within:bg-white outline-none disabled:bg-gray-100;
   }
+
+  .home-step{
+    @apply mx-auto relative z-[1] w-max text-white text-center font-medium;
+  }
+
+  .home-step span {
+    @apply bg-[#FF782C] relative rounded-full px-6 py-2;
+  }
+
+  .home-step span:before{
+    content: "";
+    background-color: #F3F3F3;
+    @apply absolute -left-1 -z-[1] rounded-full h-full aspect-square top-0 scale-[1.6];
+  }
+  .home-step span:after{
+    content: "";
+    background-color: #F3F3F3;
+    @apply absolute -right-1 -z-[1] rounded-full h-full aspect-square top-0 scale-[1.6];
+  }
+
 }
 @layer utilities {
   .separator {
