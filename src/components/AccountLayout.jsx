@@ -1,13 +1,13 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import Sidebar from "./Sidebar";
-import Header from "./Header";
+import UserDashboardHeader from "src/components/UserDashboardHeader";
 import { useRouter } from "next/router";
 
 function AccountLayout({ children }) {
   const router = useRouter();
   return (
     <>
-      <Header />
+      <UserDashboardHeader />
       <div className="container max-w-screen-2xl 2xl:px-0">
         <div className="flex h-full min-h-screen flex-col bg-gray-50 md:h-screen 2xl:m-5 2xl:h-[calc(100vh_-_2.5rem)] 2xl:min-h-[calc(100vh_-_2.5rem)] 2xl:rounded-xl 2xl:border">
           <div className="flex justify-between p-5 2xl:p-10">
