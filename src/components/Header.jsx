@@ -15,29 +15,29 @@ function Header({ onClickLogin }) {
   };
 
   const navList = (
-    <ul className="flex flex-col gap-3 md:flex-row md:items-center">
+    <ul className="flex flex-col gap-3 font-medium md:flex-row md:items-center md:font-normal">
       <li>
-        <a href="#" className="p-2">
+        <a href="#" className="inline-block p-2">
           Services
         </a>
       </li>
       <li>
-        <a href="#" className="p-2">
+        <a href="#" className="inline-block p-2">
           Subscription
         </a>
       </li>
       <li>
-        <a href="#" className="p-2">
+        <a href="#" className="inline-block p-2">
           Delotto&copy;
         </a>
       </li>
       <li>
-        <a href="#" className="p-2">
+        <a href="#" className="inline-block p-2">
           About Us
         </a>
       </li>
       <li>
-        <a href="#" className="p-2">
+        <a href="#" className="inline-block p-2">
           Contact Us
         </a>
       </li>
@@ -59,7 +59,7 @@ function Header({ onClickLogin }) {
             className="w-28 object-contain object-left py-1 lg:object-center"
             alt="Logo"
           />
-          <div className="ml-4 hidden text-white md:block">{navList}</div>
+          <div className="ml-8 hidden text-white md:block">{navList}</div>
           <div className="ml-auto hidden gap-2 lg:flex">
             {/*if user isn't logged in*/}
             <button

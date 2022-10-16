@@ -30,7 +30,7 @@
   }
 
   .home-step{
-    @apply mx-auto relative z-[1] w-max text-white text-center font-medium;
+    @apply mx-auto relative z-[1] w-max text-sm text-white text-center font-medium;
   }
 
   .home-step span {

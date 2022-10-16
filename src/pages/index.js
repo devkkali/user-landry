@@ -271,10 +271,10 @@ const Home = () => {
             <h2 className="py-8 text-center text-xl font-semibold uppercase md:py-20 md:text-3xl">
               HOW IT WORKS: IN 4 EASY STEPS
             </h2>
-            <div className="flex flex-col justify-center gap-y-10 py-4 md:flex-row md:items-start">
+            <div className="grid grid-cols-2 justify-center gap-y-10 gap-x-4 py-4 md:flex md:grid-cols-4 md:items-start md:gap-x-0">
               <div className="flex flex-col">
                 <svg
-                  className="h-28"
+                  className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 172 143">
@@ -298,7 +298,7 @@ const Home = () => {
                 <div className="home-step my-8">
                   <span>Step 1</span>
                 </div>
-                <div className="mx-auto max-w-[200px] text-center text-lg font-semibold">
+                <div className="mx-auto max-w-[200px] text-center text-sm font-semibold md:text-lg">
                   <span className="text-primary">Bag</span> up all your dirty
                   clothes
                 </div>
@@ -315,7 +315,7 @@ const Home = () => {
               </svg>
               <div className="flex flex-col">
                 <svg
-                  className="h-28"
+                  className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 199 143">
@@ -341,7 +341,7 @@ const Home = () => {
                 <div className="home-step my-8">
                   <span>Step 2</span>
                 </div>
-                <div className="mx-auto max-w-[200px] text-center text-lg font-semibold">
+                <div className="mx-auto max-w-[200px] text-center text-sm font-semibold md:text-lg">
                   Drop off or we
                   <span className="text-primary">{" pickup "}</span>
                   your clothes
@@ -359,7 +359,7 @@ const Home = () => {
               </svg>
               <div className="flex flex-col">
                 <svg
-                  className="h-28"
+                  className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 112 143">
@@ -377,7 +377,7 @@ const Home = () => {
                 <div className="home-step my-8">
                   <span>Step 3</span>
                 </div>
-                <div className="mx-auto max-w-[200px] text-center text-lg font-semibold">
+                <div className="mx-auto max-w-[200px] text-center text-sm font-semibold md:text-lg">
                   We <span className="text-primary">{" clean up "}</span> your
                   <br />
                   clothes
@@ -395,7 +395,7 @@ const Home = () => {
               </svg>
               <div className="flex flex-col">
                 <svg
-                  className="h-28"
+                  className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 130 143">
@@ -420,7 +420,7 @@ const Home = () => {
                 <div className="home-step my-8">
                   <span>Step 4</span>
                 </div>
-                <div className="mx-auto max-w-[200px] text-center text-lg font-semibold">
+                <div className="mx-auto max-w-[200px] text-center text-sm font-semibold md:text-lg">
                   You pick-up or we
                   <span className="text-primary">{" deliver "}</span> clean,
                   folded clothes
@@ -428,7 +428,7 @@ const Home = () => {
               </div>
             </div>
 
-            <h2 className="pb-8 pt-20 text-center text-2xl font-semibold md:pb-16 md:text-3xl">
+            <h2 className="pb-8 pt-20 text-center text-xl font-semibold md:pb-16 md:text-3xl">
               Why Deluxe Cleaners ?
             </h2>
             <div className="flex flex-col gap-5 lg:flex-row">
