@@ -34,6 +34,7 @@ import {
   RiYoutubeFill,
 } from "react-icons/ri";
 import Header from "src/components/Header";
+import TimeSlotPicker from "src/components/TimeSlotPicker";
 
 /**
  *  Set Home URL based on User Roles
@@ -91,15 +92,20 @@ const Home = () => {
 
   const [page, setPage] = useState("register-mobile");
 
-  const [isOpen, setIsOpen] = useState(() => {
+  const [loginModalOpen, setLoginModalOpen] = useState(() => {
     return !!router.query.requireAuth ?? false;
   });
 
+  const [pickupTimeModalOpen, setPickupTimeModalOpen] = useState(true);
+  const [deliveryTimeModalOpen, setDeliveryTimeModalOpen] = useState(false);
+
   const toggleLoginModal = () => {
-    setIsOpen((old) => !old);
+    setLoginModalOpen((old) => !old);
   };
 
-  const closeModal = () => setIsOpen(false);
+  const closeLoginModal = () => setLoginModalOpen(false);
+  const closePickupModal = () => setPickupTimeModalOpen(false);
+  const closeDeliveryModal = () => setDeliveryTimeModalOpen(false);
 
   useEffect(() => {
     if (auth.user && auth.user.role) {
@@ -113,8 +119,14 @@ const Home = () => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={closeModal}>
+      <Modal isOpen={loginModalOpen} onClose={closeLoginModal}>
         <AuthPages />
+      </Modal>
+      <Modal isOpen={pickupTimeModalOpen} onClose={closePickupModal}>
+        <TimeSlotPicker title="Pickup Time Slot" />
+      </Modal>
+      <Modal isOpen={deliveryTimeModalOpen} onClose={closeDeliveryModal}>
+        <TimeSlotPicker title="Delivery Time Slot" />
       </Modal>
       {/*header*/}
       <Header onClickLogin={toggleLoginModal} />
@@ -134,7 +146,7 @@ const Home = () => {
                 Schedule your laundry items
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-2">
-                <div className="rounded-lg bg-white px-3 py-2">
+                <div className="cursor-pointer rounded-lg bg-white px-3 py-2">
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Pickup Address
                   </div>
@@ -143,7 +155,9 @@ const Home = () => {
                     <span>New York, USA</span>
                   </div>
                 </div>
-                <div className="rounded-lg bg-white px-3 py-2">
+                <div
+                  onClick={() => setPickupTimeModalOpen(true)}
+                  className="cursor-pointer rounded-lg bg-white px-3 py-2">
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Pickup time slot
                   </div>
@@ -152,7 +166,7 @@ const Home = () => {
                     <span>17/04/22 (06:00 - 20:00)</span>
                   </div>
                 </div>
-                <div className="rounded-lg bg-white px-3 py-2">
+                <div className="cursor-pointer rounded-lg bg-white px-3 py-2">
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Delivery Address
                   </div>
@@ -161,7 +175,9 @@ const Home = () => {
                     <span>New York, USA</span>
                   </div>
                 </div>
-                <div className="rounded-lg bg-white px-3 py-2">
+                <div
+                  onClick={() => setDeliveryTimeModalOpen(true)}
+                  className="cursor-pointer rounded-lg bg-white px-3 py-2">
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Delivery time slot
                   </div>
