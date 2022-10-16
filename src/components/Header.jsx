@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/future/image";
 import { RiMenu5Fill, RiNotification2Fill, RiUser3Fill } from "react-icons/ri";
+import Head from "next/head";
 
 function Header({ onClickLogin }) {
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
@@ -50,6 +51,9 @@ function Header({ onClickLogin }) {
 
   return (
     <>
+      <Head>
+        <meta name="theme-color" content="#185ADB" />
+      </Head>
       <header className="sticky top-0 z-50 w-full border-b border-gray-50/10 bg-primary">
         <div className="container flex items-center py-2">
           <Image

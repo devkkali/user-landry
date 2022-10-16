@@ -23,28 +23,28 @@ function MyApp({ Component, pageProps }) {
   // Variables
   const getLayout =
     Component.getLayout ?? ((page) => <UserLayout>{page}</UserLayout>);
-  // const setConfig = Component.setConfig ?? undefined;
-  // const authGuard = Component.authGuard ?? true;
-  // const guestGuard = Component.guestGuard ?? false;
-  // // const aclAbilities = Component.acl ?? defaultACLObj
+  const setConfig = Component.setConfig ?? undefined;
+  const authGuard = Component.authGuard ?? true;
+  const guestGuard = Component.guestGuard ?? false;
+  // const aclAbilities = Component.acl ?? defaultACLObj
 
   return (
     <>
-      {/*<AuthProvider>*/}
-      {/*  <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>*/}
-      {/*    <SettingsConsumer>*/}
-      {/*      {({ settings }) => {*/}
-      {/*        return (*/}
-      {/*          <Layout>*/}
-      {/*            <Guard authGuard={authGuard} guestGuard={guestGuard}>*/}
-      {getLayout(<Component {...pageProps} />)}
-      {/*            </Guard>*/}
-      {/*          </Layout>*/}
-      {/*        );*/}
-      {/*      }}*/}
-      {/*    </SettingsConsumer>*/}
-      {/*  </SettingsProvider>*/}
-      {/*</AuthProvider>*/}
+      <AuthProvider>
+        <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+          <SettingsConsumer>
+            {({ settings }) => {
+              return (
+                <Layout>
+                  <Guard authGuard={authGuard} guestGuard={guestGuard}>
+                    {getLayout(<Component {...pageProps} />)}
+                  </Guard>
+                </Layout>
+              );
+            }}
+          </SettingsConsumer>
+        </SettingsProvider>
+      </AuthProvider>
     </>
   );
 }

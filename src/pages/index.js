@@ -752,29 +752,31 @@ const Home = () => {
           <div className="absolute left-1/2 bottom-0 top-4 z-0 w-full rounded-tl-[10rem] bg-yellow-200" />
         </div>
       </main>
-      <footer hidden className="border-b-2 border-white bg-primary text-white">
-        <div className="container flex justify-between gap-4 border-b-2 border-white/20 py-10">
+      <footer className="border-b-2 border-white bg-primary text-white">
+        <div className="container flex flex-col justify-between gap-4 border-b-2 border-white/20 py-8 md:flex-row md:py-10">
           <div>
-            <h1 className="text-3xl font-bold">
+            <div className="text-xl font-bold md:text-3xl">
               GET STARTED TODAY!
-              <span className="ml-3 text-xl font-medium">+1(919) 438-0450</span>
-            </h1>
-            <div className="mt-8 space-y-2">
-              <div className="flex gap-4 text-lg">
-                <RiTimeFill size={23} />
+              <div className="mt-2 font-normal md:ml-3 md:mt-0 md:inline md:text-xl md:font-medium">
+                +1(919) 438-0450
+              </div>
+            </div>
+            <div className="mt-8 space-y-3 md:space-y-2">
+              <div className="flex gap-4 md:text-lg">
+                <RiTimeFill className="shrink-0" size={23} />
                 <span>Mon - Fri 7am - 7pm Sat 9am - 3pm</span>
               </div>
-              <div className="flex gap-4 text-lg">
-                <RiMapPin5Fill size={23} />
+              <div className="flex gap-4 md:text-lg">
+                <RiMapPin5Fill className="shrink-0" size={23} />
                 <span>1810 Martin Luther King Jr PkwyDurham, NC 27707</span>
               </div>
-              <div className="flex gap-4 text-lg">
-                <RiMailSendFill size={23} />
+              <div className="flex gap-4 md:text-lg">
+                <RiMailSendFill className="shrink-0" size={23} />
                 <span>contact@deluxecleanersnc.com</span>
               </div>
             </div>
           </div>
-          <div className="min-w-[15rem]">
+          <div className="mt-8 min-w-[15rem] md:mt-0">
             <h2 className="text-xl font-semibold">Important Links</h2>
             <ul className="mt-4 space-y-2">
               <li>
@@ -795,28 +797,10 @@ const Home = () => {
             </ul>
           </div>
         </div>
-        <div className="container flex items-center gap-4 py-6">
-          <Image
-            src={"/images/app-logo.png"}
-            width={160}
-            height={90}
-            className="object-contain object-left lg:object-center"
-            alt="Logo"
-          />
-          <div>
-            <div className="mb-2 flex gap-3">
-              <RiFacebookBoxFill size={24} />
-              <RiTwitterFill size={24} />
-              <RiInstagramFill size={24} />
-              <RiYoutubeFill size={24} />
-              <RiLinkedinBoxFill size={24} />
-              <RiPinterestFill size={24} />
-            </div>
-            <div>&copy; 2022 Deluxe Cleaners</div>
-          </div>
-          <div className="ml-auto flex items-center">
-            <span className="text-xl">Download our app</span>
-            <div className="ml-10 flex gap-4">
+        <div className="container flex flex-col items-center gap-4 py-6 md:flex-row-reverse">
+          <div className="mb-4 items-center md:mb-0 md:ml-auto md:flex">
+            <div className="text-center md:text-xl">Download our app</div>
+            <div className="mt-4 flex flex-col gap-4 md:mt-0 md:ml-10 md:flex-row">
               <div className="flex items-center rounded-xl bg-black py-2 px-3">
                 <img
                   src="/images/google-play.png"
@@ -839,6 +823,26 @@ const Home = () => {
                   <div className="text-lg font-bold leading-5">App Store</div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-8 lg:flex-row">
+            <Image
+              src={"/images/app-logo.png"}
+              width={160}
+              height={90}
+              className="w-32 object-contain object-center"
+              alt="Logo"
+            />
+            <div>
+              <div className="mb-2 flex gap-3">
+                <RiFacebookBoxFill size={24} />
+                <RiTwitterFill size={24} />
+                <RiInstagramFill size={24} />
+                <RiYoutubeFill size={24} />
+                <RiLinkedinBoxFill size={24} />
+                <RiPinterestFill size={24} />
+              </div>
+              <div className="text-center">&copy; 2022 Deluxe Cleaners</div>
             </div>
           </div>
         </div>
