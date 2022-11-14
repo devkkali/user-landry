@@ -5,8 +5,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/future/image";
 import { RiMenu5Fill, RiNotification2Fill, RiUser3Fill } from "react-icons/ri";
 import Head from "next/head";
+import Link from "next/link";
 
-function Header({ onClickLogin }) {
+function HeaderHome({ onClickLogin }) {
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
 
   const { asPath } = useRouter();
@@ -18,29 +19,29 @@ function Header({ onClickLogin }) {
   const navList = (
     <ul className="flex flex-col gap-3 font-medium md:flex-row md:items-center md:font-normal">
       <li>
-        <a href="#" className="inline-block p-2">
-          Services
-        </a>
+        <Link href="/services">
+          <a className="inline-block p-2">Services</a>
+        </Link>
       </li>
       <li>
-        <a href="#" className="inline-block p-2">
-          Subscription
-        </a>
+        <Link href="#">
+          <a className="inline-block p-2">Subscription</a>
+        </Link>
       </li>
       <li>
-        <a href="#" className="inline-block p-2">
-          Delotto&copy;
-        </a>
+        <Link href="#">
+          <a className="inline-block p-2">Delotto&copy;</a>
+        </Link>
       </li>
       <li>
-        <a href="#" className="inline-block p-2">
-          About Us
-        </a>
+        <Link href="#">
+          <a className="inline-block p-2">About Us</a>
+        </Link>
       </li>
       <li>
-        <a href="#" className="inline-block p-2">
-          Contact Us
-        </a>
+        <Link href="#">
+          <a className="inline-block p-2">Contact Us</a>
+        </Link>
       </li>
     </ul>
   );
@@ -56,19 +57,25 @@ function Header({ onClickLogin }) {
       </Head>
       <header className="sticky top-0 z-50 w-full border-b border-gray-50/10 bg-primary">
         <div className="container flex items-center py-2">
-          <Image
-            src={"/images/app-logo.png"}
-            width={160}
-            height={90}
-            className="w-28 object-contain object-left py-1 lg:object-center"
-            alt="Logo"
-          />
+          <Link href="/">
+            <a>
+              <Image
+                src={"/images/app-logo.png"}
+                width={160}
+                height={90}
+                className="w-28 object-contain object-left py-1 lg:object-center"
+                alt="Logo"
+              />
+            </a>
+          </Link>
+
           <div className="ml-8 hidden text-white md:block">{navList}</div>
           <div className="ml-auto hidden gap-2 lg:flex">
             {/*if user isn't logged in*/}
             <button
               onClick={onClickLogin}
-              className="ml-6 rounded-lg py-3 px-6 font-semibold text-white hover:bg-white hover:text-primary">
+              className="ml-6 rounded-lg py-3 px-6 font-semibold text-white hover:bg-white hover:text-primary"
+            >
               <span>Login</span>
             </button>
             <button className="rounded-lg bg-white px-6 py-3 font-semibold text-primary hover:bg-white/90">
@@ -93,7 +100,8 @@ function Header({ onClickLogin }) {
           <div className="ml-auto flex lg:hidden">
             <button
               onClick={toggleMenu}
-              className="rounded-md p-2 hover:bg-black/10">
+              className="rounded-md p-2 hover:bg-black/10"
+            >
               <RiMenu5Fill className="text-white" size={28} />
             </button>
 
@@ -115,7 +123,8 @@ function Header({ onClickLogin }) {
         <Dialog
           as="div"
           className="relative z-[1000] md:hidden"
-          onClose={setSideMenuOpen}>
+          onClose={setSideMenuOpen}
+        >
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -123,7 +132,8 @@ function Header({ onClickLogin }) {
             enterTo="opacity-100"
             leave="transition-opacity ease-linear duration-300"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0">
+            leaveTo="opacity-0"
+          >
             <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
           </Transition.Child>
 
@@ -135,13 +145,15 @@ function Header({ onClickLogin }) {
               enterTo="translate-x-0"
               leave="transition ease-in-out duration-300 transform"
               leaveFrom="translate-x-0"
-              leaveTo="-translate-x-full">
+              leaveTo="-translate-x-full"
+            >
               <Dialog.Panel className="relative flex w-full flex-1 flex-col bg-gray-50">
                 <div className="flex items-center justify-between gap-2 border-b p-4">
                   <h1 className="text-lg font-semibold">Menu</h1>
                   <button
                     onClick={toggleMenu}
-                    className="text-gray-500 hover:text-dark">
+                    className="text-gray-500 hover:text-dark"
+                  >
                     <XMarkIcon className="h-6 w-6 stroke-2" />
                   </button>
                 </div>
@@ -156,4 +168,4 @@ function Header({ onClickLogin }) {
   );
 }
 
-export default Header;
+export default HeaderHome;

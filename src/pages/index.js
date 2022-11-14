@@ -1,17 +1,10 @@
-// ** React Imports
-import { useEffect, useState } from "react";
-
-// ** Next Imports
-import { useRouter } from "next/router";
-
-// ** Spinner Import
-// import Spinner from 'src/@core/components/spinner'
-
-// ** Hook Imports
-import { useAuth } from "src/hooks/useAuth";
-import AuthPages from "src/components/AuthPages";
 import Image from "next/future/image";
-import Modal from "src/components/Modal";
+import React, { useState } from "react";
+import Modal from "../components/Modal";
+import AuthPages from "../components/AuthPages";
+// import ChooseLocation from "../components/ChooseLocation";
+// import TimeSlotPicker from "../components/TimeSlotPicker";
+import HeaderHome from "../components/HeaderHome";
 import {
   RiCalendarFill,
   RiDoubleQuotesL,
@@ -21,8 +14,6 @@ import {
   RiMailSendFill,
   RiMapPin2Fill,
   RiMapPin5Fill,
-  RiMenu5Fill,
-  RiNotification2Fill,
   RiPinterestFill,
   RiShieldCheckFill,
   RiShieldStarFill,
@@ -30,20 +21,8 @@ import {
   RiStarFill,
   RiTimeFill,
   RiTwitterFill,
-  RiUser3Fill,
   RiYoutubeFill,
 } from "react-icons/ri";
-import Header from "src/components/Header";
-import TimeSlotPicker from "src/components/TimeSlotPicker";
-
-/**
- *  Set Home URL based on User Roles
- */
-export const getHomeRoute = (role) => {
-  if (role === "user") return "/home";
-  else return "/dashboards/crm";
-};
-
 //demo data
 const services = [
   {
@@ -84,20 +63,11 @@ const services = [
   },
 ];
 
-const Home = () => {
-  const auth = useAuth();
-  const router = useRouter();
-
-  // console.log('hello ',router.query.requireAuth)
-
-  const [page, setPage] = useState("register-mobile");
-
-  const [loginModalOpen, setLoginModalOpen] = useState(() => {
-    return !!router.query.requireAuth ?? false;
-  });
-
-  const [pickupTimeModalOpen, setPickupTimeModalOpen] = useState(true);
+export default function Home() {
+  const [pickupTimeModalOpen, setPickupTimeModalOpen] = useState(false);
   const [deliveryTimeModalOpen, setDeliveryTimeModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
 
   const toggleLoginModal = () => {
     setLoginModalOpen((old) => !old);
@@ -106,30 +76,24 @@ const Home = () => {
   const closeLoginModal = () => setLoginModalOpen(false);
   const closePickupModal = () => setPickupTimeModalOpen(false);
   const closeDeliveryModal = () => setDeliveryTimeModalOpen(false);
-
-  useEffect(() => {
-    if (auth.user && auth.user.role) {
-      const homeRoute = getHomeRoute(auth.user.role);
-
-      // Redirect user to Home URL
-      router.replace(homeRoute);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const closeLocationModal = () => setLocationModalOpen(false);
 
   return (
     <>
       <Modal isOpen={loginModalOpen} onClose={closeLoginModal}>
         <AuthPages />
       </Modal>
-      <Modal isOpen={pickupTimeModalOpen} onClose={closePickupModal}>
+      {/* <Modal isOpen={pickupTimeModalOpen} onClose={closePickupModal}>
         <TimeSlotPicker title="Pickup Time Slot" />
-      </Modal>
-      <Modal isOpen={deliveryTimeModalOpen} onClose={closeDeliveryModal}>
+      </Modal> */}
+      {/* <Modal isOpen={deliveryTimeModalOpen} onClose={closeDeliveryModal}>
         <TimeSlotPicker title="Delivery Time Slot" />
-      </Modal>
-      {/*header*/}
-      <Header onClickLogin={toggleLoginModal} />
+      </Modal> */}
+      {/* <Modal isOpen={locationModalOpen} onClose={closeLocationModal}>
+        <ChooseLocation />
+      </Modal> */}
+      <HeaderHome onClickLogin={toggleLoginModal} />
+
       <div className="bg-[#185adb]">
         <div className="container flex flex-col py-3 md:flex-row lg:gap-16">
           <div className="w-full py-4 lg:py-10">
@@ -141,12 +105,15 @@ const Home = () => {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid
               aut debitis deleniti distinctio.
             </p>
-            <div className="mt-8 hidden lg:block">
+            <div className="shidden mt-8 lg:block">
               <h2 className="text-xl font-semibold text-white">
                 Schedule your laundry items
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-2">
-                <div className="cursor-pointer rounded-lg bg-white px-3 py-2">
+                <div
+                  onClick={() => setLocationModalOpen(true)}
+                  className="cursor-pointer rounded-lg bg-white px-3 py-2"
+                >
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Pickup Address
                   </div>
@@ -157,7 +124,8 @@ const Home = () => {
                 </div>
                 <div
                   onClick={() => setPickupTimeModalOpen(true)}
-                  className="cursor-pointer rounded-lg bg-white px-3 py-2">
+                  className="cursor-pointer rounded-lg bg-white px-3 py-2"
+                >
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Pickup time slot
                   </div>
@@ -166,7 +134,10 @@ const Home = () => {
                     <span>17/04/22 (06:00 - 20:00)</span>
                   </div>
                 </div>
-                <div className="cursor-pointer rounded-lg bg-white px-3 py-2">
+                <div
+                  onClick={() => setLocationModalOpen(true)}
+                  className="cursor-pointer rounded-lg bg-white px-3 py-2"
+                >
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Delivery Address
                   </div>
@@ -177,7 +148,8 @@ const Home = () => {
                 </div>
                 <div
                   onClick={() => setDeliveryTimeModalOpen(true)}
-                  className="cursor-pointer rounded-lg bg-white px-3 py-2">
+                  className="cursor-pointer rounded-lg bg-white px-3 py-2"
+                >
                   <div className="mb-0.5 text-sm font-medium text-dark/70">
                     Delivery time slot
                   </div>
@@ -202,15 +174,17 @@ const Home = () => {
               className="absolute right-0 top-0 h-full w-full"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 859 625">
+              viewBox="0 0 859 625"
+            >
               <filter
                 id="1337svg"
                 width="878.244"
                 height="645"
                 x="-9.244"
                 y="-10"
-                color-interpolation-filters="sRGB"
-                filterUnits="userSpaceOnUse">
+                colorInterpolationFilters="sRGB"
+                filterUnits="userSpaceOnUse"
+              >
                 <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feGaussianBlur in="BackgroundImageFix" stdDeviation="5" />
                 <feComposite
@@ -231,7 +205,7 @@ const Home = () => {
                 />
               </g>
             </svg>
-            <div className="relative z-10 overflow-hidden">
+            <div className="relative bottom-0 z-10 overflow-hidden">
               <img src="/images/lady.png" alt="" className="translate-y-3" />
             </div>
           </div>
@@ -253,7 +227,8 @@ const Home = () => {
           {services.map((service, index) => (
             <div
               key={"service" + index}
-              className="w-full cursor-pointer rounded-2xl md:flex md:overflow-hidden md:shadow-sm md:hover:shadow">
+              className="w-full cursor-pointer rounded-2xl md:flex md:overflow-hidden md:shadow-sm md:hover:shadow"
+            >
               <div className="mx-auto flex h-36 w-full max-w-[12rem] flex-col overflow-hidden rounded-2xl bg-white md:h-48 md:w-48 md:rounded-none">
                 <div className="flex-1 overflow-hidden p-2 pb-4 md:p-0">
                   <div className="relative h-full rounded-xl bg-[#DAFFE9] md:rounded-none">
@@ -293,7 +268,8 @@ const Home = () => {
                   className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  viewBox="0 0 172 143">
+                  viewBox="0 0 172 143"
+                >
                   <path
                     fill="#568FFF"
                     d="M68 3.6c-2.534 1.334-6 4.934-8 8.4l-3.467 6-13.334.934c-7.2.533-14.533 1.333-16.266 1.733-3.334.8-8.267 5.2-8.267 7.334 0 .933 23.6 1.333 68.4 1.333l68.267-.133-3.734-3.2c-2.933-2.534-5.2-3.334-10.4-3.334-7.733 0-14.133-2.4-17.866-6.666-3.867-4.267-8.4-6.267-17.2-7.334-4.267-.533-10-2-12.667-3.466C85.999 1.334 73.733.534 67.999 3.6Z"
@@ -323,7 +299,8 @@ const Home = () => {
                 className="mt-12 hidden w-36 md:block"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 212 48">
+                viewBox="0 0 212 48"
+              >
                 <path
                   fill="#D3D3D3"
                   d="m99.898 46.5-.403.915.373.165.382-.144-.352-.936ZM211.31 5.366a1 1 0 0 0-.498-1.323L202.615.325a1 1 0 1 0-.826 1.822l7.286 3.304-3.304 7.286a1 1 0 0 0 1.821.826l3.718-8.197ZM.994 3.915l98.5 43.5.808-1.83-98.5-43.5-.808 1.83Zm99.256 43.521L210.751 5.889l-.704-1.872-110.5 41.547.703 1.872Z"
@@ -334,7 +311,8 @@ const Home = () => {
                   className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  viewBox="0 0 199 143">
+                  viewBox="0 0 199 143"
+                >
                   <path
                     fill="#185ADB"
                     d="M9.599 15.066c-.934 1.067-1.6 12.933-1.867 32.667l-.4 30.933h119.467l-.4-30.4c-.267-23.467-.8-31.067-2.267-32.667-1.6-2-7.333-2.266-57.467-2.266-44.266 0-56 .4-57.066 1.733Z"
@@ -367,7 +345,8 @@ const Home = () => {
                 className="mt-12 hidden w-36 -scale-y-100 md:block"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 212 48">
+                viewBox="0 0 212 48"
+              >
                 <path
                   fill="#D3D3D3"
                   d="m99.898 46.5-.403.915.373.165.382-.144-.352-.936ZM211.31 5.366a1 1 0 0 0-.498-1.323L202.615.325a1 1 0 1 0-.826 1.822l7.286 3.304-3.304 7.286a1 1 0 0 0 1.821.826l3.718-8.197ZM.994 3.915l98.5 43.5.808-1.83-98.5-43.5-.808 1.83Zm99.256 43.521L210.751 5.889l-.704-1.872-110.5 41.547.703 1.872Z"
@@ -378,7 +357,8 @@ const Home = () => {
                   className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  viewBox="0 0 112 143">
+                  viewBox="0 0 112 143"
+                >
                   <path
                     fill="#185ADB"
                     d="M10.934 10.8c-2.667.8-5.333 2.933-6.933 5.6-2.534 4-2.667 6.933-2.667 58.267 0 40.533.4 54.8 1.733 57.333.934 1.867 3.734 4.4 6.267 5.6 4.133 2.133 9.333 2.4 46.4 2.4 44.667 0 48.267-.4 52.8-6.8 1.867-2.8 2.133-9.467 2.133-58.533 0-49.067-.266-55.734-2.133-58.534-4.533-6.4-8.133-6.8-52.133-6.666-22.534 0-43.067.666-45.467 1.333Zm56.667 34.933c9.066 3.334 16 9.734 20.4 18.8 3.866 7.867 4.266 9.734 3.733 17.2-.933 10.267-4.4 17.334-12.133 24.534-14.4 13.2-34.267 12.666-48.4-1.467-10.8-10.933-13.734-23.333-8.534-37.067 6.667-17.866 27.867-28.266 44.934-22Z"
@@ -403,7 +383,8 @@ const Home = () => {
                 className="mt-12 hidden w-36 md:block"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 212 48">
+                viewBox="0 0 212 48"
+              >
                 <path
                   fill="#D3D3D3"
                   d="m99.898 46.5-.403.915.373.165.382-.144-.352-.936ZM211.31 5.366a1 1 0 0 0-.498-1.323L202.615.325a1 1 0 1 0-.826 1.822l7.286 3.304-3.304 7.286a1 1 0 0 0 1.821.826l3.718-8.197ZM.994 3.915l98.5 43.5.808-1.83-98.5-43.5-.808 1.83Zm99.256 43.521L210.751 5.889l-.704-1.872-110.5 41.547.703 1.872Z"
@@ -414,7 +395,8 @@ const Home = () => {
                   className="h-16 md:h-28"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  viewBox="0 0 130 143">
+                  viewBox="0 0 130 143"
+                >
                   <g clipPath="url(#fold)">
                     <path
                       fill="#87AFFC"
@@ -499,7 +481,8 @@ const Home = () => {
                     className="h-14 w-14"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
-                    viewBox="0 0 64 64">
+                    viewBox="0 0 64 64"
+                  >
                     <path
                       fill="#FF782C"
                       d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
@@ -547,7 +530,8 @@ const Home = () => {
                       className="h-14 w-14"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
-                      viewBox="0 0 64 64">
+                      viewBox="0 0 64 64"
+                    >
                       <path
                         fill="#FF782C"
                         d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
@@ -592,7 +576,188 @@ const Home = () => {
                     className="h-14 w-14"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
-                    viewBox="0 0 64 64">
+                    viewBox="0 0 64 64"
+                  >
+                    <path
+                      fill="#FF782C"
+                      d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#fff"
+                      d="M51.196 15.718c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#FF782C"
+                      d="M40.76 24.196c-.603.258-1.12.86-4.627 5.185-1.678 2.066-3.12 3.787-3.227 3.83-.108.043-.84-.56-1.657-1.312-1.958-1.83-2.388-2.088-3.356-2.088-1.593 0-2.733 1.162-2.733 2.733.022.452.13 1.011.28 1.27.236.387 3.442 3.42 5.53 5.206 1.032.904 2.216 1.098 3.248.603 1.055-.538 9.92-11.188 10.2-12.286.343-1.398-.883-3.012-2.475-3.227-.41-.065-.947-.022-1.184.086Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">DE-VINE</div>
+                  <div className="mt-0.5">
+                    <span className="text-lg font-semibold">$50.00</span>
+                    {" monthly"}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 space-y-3">
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Pickups</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Delivery</span>
+                </div>
+              </div>
+              <button className="mx-auto mb-4 mt-10 block w-max rounded-full bg-[#FF782C] py-2.5 px-8 text-white">
+                Choose Plan
+              </button>
+            </div>
+            <div className="max-w-xs shrink-0 rounded-xl bg-[#F3F3F3] p-8">
+              <div className="flex items-center gap-4">
+                <div className="rounded-lg bg-primary/[15%] py-1.5 px-2">
+                  <svg
+                    className="h-14 w-14"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 64 64"
+                  >
+                    <path
+                      fill="#FF782C"
+                      d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#fff"
+                      d="M51.196 15.718c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#FF782C"
+                      d="M40.76 24.196c-.603.258-1.12.86-4.627 5.185-1.678 2.066-3.12 3.787-3.227 3.83-.108.043-.84-.56-1.657-1.312-1.958-1.83-2.388-2.088-3.356-2.088-1.593 0-2.733 1.162-2.733 2.733.022.452.13 1.011.28 1.27.236.387 3.442 3.42 5.53 5.206 1.032.904 2.216 1.098 3.248.603 1.055-.538 9.92-11.188 10.2-12.286.343-1.398-.883-3.012-2.475-3.227-.41-.065-.947-.022-1.184.086Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">DE-VINE</div>
+                  <div className="mt-0.5">
+                    <span className="text-lg font-semibold">$50.00</span>
+                    {" monthly"}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 space-y-3">
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Pickups</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Delivery</span>
+                </div>
+              </div>
+              <button className="mx-auto mb-4 mt-10 block w-max rounded-full bg-[#FF782C] py-2.5 px-8 text-white">
+                Choose Plan
+              </button>
+            </div>
+            <div className="max-w-xs shrink-0 rounded-xl bg-[#F3F3F3] p-8">
+              <div className="flex items-center gap-4">
+                <div className="rounded-lg bg-primary/[15%] py-1.5 px-2">
+                  <svg
+                    className="h-14 w-14"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 64 64"
+                  >
+                    <path
+                      fill="#FF782C"
+                      d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#fff"
+                      d="M51.196 15.718c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#FF782C"
+                      d="M40.76 24.196c-.603.258-1.12.86-4.627 5.185-1.678 2.066-3.12 3.787-3.227 3.83-.108.043-.84-.56-1.657-1.312-1.958-1.83-2.388-2.088-3.356-2.088-1.593 0-2.733 1.162-2.733 2.733.022.452.13 1.011.28 1.27.236.387 3.442 3.42 5.53 5.206 1.032.904 2.216 1.098 3.248.603 1.055-.538 9.92-11.188 10.2-12.286.343-1.398-.883-3.012-2.475-3.227-.41-.065-.947-.022-1.184.086Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">DE-VINE</div>
+                  <div className="mt-0.5">
+                    <span className="text-lg font-semibold">$50.00</span>
+                    {" monthly"}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 space-y-3">
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Pickups</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Delivery</span>
+                </div>
+              </div>
+              <button className="mx-auto mb-4 mt-10 block w-max rounded-full bg-[#FF782C] py-2.5 px-8 text-white">
+                Choose Plan
+              </button>
+            </div>
+            <div className="max-w-xs shrink-0 rounded-xl bg-[#F3F3F3] p-8">
+              <div className="flex items-center gap-4">
+                <div className="rounded-lg bg-primary/[15%] py-1.5 px-2">
+                  <svg
+                    className="h-14 w-14"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 64 64"
+                  >
+                    <path
+                      fill="#FF782C"
+                      d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#fff"
+                      d="M51.196 15.718c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
+                    />
+                    <path
+                      fill="#FF782C"
+                      d="M40.76 24.196c-.603.258-1.12.86-4.627 5.185-1.678 2.066-3.12 3.787-3.227 3.83-.108.043-.84-.56-1.657-1.312-1.958-1.83-2.388-2.088-3.356-2.088-1.593 0-2.733 1.162-2.733 2.733.022.452.13 1.011.28 1.27.236.387 3.442 3.42 5.53 5.206 1.032.904 2.216 1.098 3.248.603 1.055-.538 9.92-11.188 10.2-12.286.343-1.398-.883-3.012-2.475-3.227-.41-.065-.947-.022-1.184.086Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">DE-VINE</div>
+                  <div className="mt-0.5">
+                    <span className="text-lg font-semibold">$50.00</span>
+                    {" monthly"}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 space-y-3">
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Pickups</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RiStarFill size={18} className="text-primary" />
+                  <span className="font-medium">8 Laundry Delivery</span>
+                </div>
+              </div>
+              <button className="mx-auto mb-4 mt-10 block w-max rounded-full bg-[#FF782C] py-2.5 px-8 text-white">
+                Choose Plan
+              </button>
+            </div>
+            <div className="max-w-xs shrink-0 rounded-xl bg-[#F3F3F3] p-8">
+              <div className="flex items-center gap-4">
+                <div className="rounded-lg bg-primary/[15%] py-1.5 px-2">
+                  <svg
+                    className="h-14 w-14"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 64 64"
+                  >
                     <path
                       fill="#FF782C"
                       d="M12.768 12.469c-1.937.602-2.905 1.915-3.701 4.97-.258.947-1.764 8.391-3.378 16.525C3.45 45.216 2.784 48.982 2.892 49.627c.193 1.098 1.011 2.066 2 2.345.56.173 8.844.216 26.831.173l26.035-.065 1.011-.602c.56-.323 1.227-.883 1.485-1.248 1.033-1.442 1.076-1.076-2.389-18.375-2.044-10.177-3.378-16.438-3.679-17.02-.56-1.161-1.657-2.151-2.71-2.43-1.27-.366-37.568-.302-38.708.064Zm38.428 3.249c.43.473.903 2.517 3.7 16.287 2.432 12.071 3.12 15.88 2.97 16.267-.108.258-.452.58-.775.688-.344.13-7.316.215-18.59.215h-18.03l-.538-.624c-.345-.408-.689-1.334-1.012-2.754-.258-1.161-1.29-5.465-2.28-9.574-2.023-8.392-3.357-14.739-3.766-17.902l-.28-2.13.603-.495.581-.516h36.922l.495.538Z"
@@ -865,8 +1030,4 @@ const Home = () => {
       </footer>
     </>
   );
-};
-
-Home.authGuard = false;
-// Home.guestGuard = true
-export default Home;
+}
